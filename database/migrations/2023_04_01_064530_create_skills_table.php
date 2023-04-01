@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->enum('type' , ['PERSONAL' , 'SOFTMARE']);
+            $table->string('title_en');
+            $table->string('title_ar')->nullable();
+            $table->string('percentage');
             $table->timestamps();
         });
     }
