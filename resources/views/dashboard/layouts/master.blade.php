@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ \Illuminate\Support\Facades\App::currentLocale() }}" dir="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocaleDirection() }}">
+<html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
@@ -9,28 +9,28 @@
 		<meta name="Author" content="Spruko Technologies Private Limited">
 		<meta name="Keywords" content="admin,admin dashboard,admin dashboard template,admin panel template,admin template,admin theme,bootstrap 4 admin template,bootstrap 4 dashboard,bootstrap admin,bootstrap admin dashboard,bootstrap admin panel,bootstrap admin template,bootstrap admin theme,bootstrap dashboard,bootstrap form template,bootstrap panel,bootstrap ui kit,dashboard bootstrap 4,dashboard design,dashboard html,dashboard template,dashboard ui kit,envato templates,flat ui,html,html and css templates,html dashboard template,html5,jquery html,premium,premium quality,sidebar bootstrap 4,template admin bootstrap 4"/>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-		@include('layouts.head')
+		@include('dashboard.layouts.head')
 	</head>
 
 	<body class="main-body app sidebar-mini" style="font-family: cairo, sans-serif;font-style: normal;font-weight: 200;">
 
 		<!-- Loader -->
 		<div id="global-loader">
-			<img src="{{URL::asset('assets/img/loader.svg')}}" class="loader-img" alt="Loader">
+			<img src="{{URL::asset('assets/dashboard/img/loader.svg')}}" class="loader-img" alt="Loader">
 		</div>
 		<!-- /Loader -->
-		@include('layouts.main-sidebar')
+		@include('dashboard.layouts.main-sidebar')
 		<!-- main-content -->
 		<div class="main-content app-content">
-			@include('layouts.main-header')
+			@include('dashboard.layouts.main-header')
 			<!-- container -->
 			<div class="container-fluid">
 				@yield('page-header')
 				@yield('content')
-				@include('layouts.sidebar')
-				@include('layouts.models')
-            	@include('layouts.footer')
+				@include('dashboard.layouts.sidebar')
+				@include('dashboard.layouts.models')
+            	@include('dashboard.layouts.footer')
         	</div>
-				@include('layouts.footer-scripts')
+				@include('dashboard.layouts.footer-scripts')
 	</body>
 </html>
