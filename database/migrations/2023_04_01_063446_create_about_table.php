@@ -26,13 +26,14 @@ return new class extends Migration
             $table->string('Nationality_ar')->nullable();
             $table->string('job_title_en');
             $table->string('job_title_ar')->nullable();
-            $table->string('job_escription_en');
-            $table->string('job_escription_ar')->nullable();
+            $table->string('job_description_en');
+            $table->string('job_description_ar')->nullable();
             $table->mediumText('about_en');
             $table->mediumText('about_ar')->nullable();
             $table->string('cv');
             $table->string('first_photo');
             $table->string('second_photo');
+            $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });
     }
