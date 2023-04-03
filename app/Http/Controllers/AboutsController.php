@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-class AboutController extends Controller
+class AboutsController extends Controller
 {
     /**
      * Display a listing of the resource.

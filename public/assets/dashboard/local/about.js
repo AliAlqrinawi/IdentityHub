@@ -184,7 +184,6 @@ $(document).on('click', '#status', function (e) {
                     $('#error_message').html("");
                     $('#error_message').addClass("alert alert-success");
                     $('#error_message').text(response.message);
-                    $('#modalAboutMeDelete').modal('hide');
                     table.ajax.reload(null, false);
                 }
         }
