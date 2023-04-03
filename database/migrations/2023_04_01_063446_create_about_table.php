@@ -31,7 +31,8 @@ return new class extends Migration
             $table->mediumText('about_en');
             $table->mediumText('about_ar')->nullable();
             $table->string('cv');
-            $table->string('photo');
+            $table->string('first_photo');
+            $table->string('second_photo');
             $table->timestamps();
         });
     }

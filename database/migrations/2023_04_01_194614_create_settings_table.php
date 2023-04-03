@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key_id');
-            $table->string('title_ar');
-            $table->string('titgit addle_en');
-            $table->string('value');
-            $table->string('set_group');
+            $table->string('key')->unique();
+            $table->longText('value')->nullable();
+            $table->string('label_en');
+            $table->string('label_ar');
+            $table->string('type');
+            $table->string('group');
             $table->timestamps();
         });
     }
