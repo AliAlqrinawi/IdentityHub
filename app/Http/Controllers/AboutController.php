@@ -103,7 +103,7 @@ class AboutController extends Controller
                 $cv->move(public_path('cv'), $cvName);
                 $aboutData['cv'] = 'cv/' . $cvName;
             }
-            $ads = About::create($aboutData);
+            $about = About::create($aboutData);
                 $response = [
                     'message' => 'Added successfully',
                     'status' => 200,
@@ -137,12 +137,12 @@ class AboutController extends Controller
      */
     public function edit($id)
     {
-        $ads = About::find($id);
-        if($ads){
+        $about = About::find($id);
+        if($about){
             $response = [
                 'message' => 'Found Data',
                 'status' => 200,
-                'data' => $ads
+                'data' => $about
             ];
             return ControllersService::responseSuccess($response);
         }else{
@@ -198,7 +198,7 @@ class AboutController extends Controller
                 $cv->move(public_path('cv'), $cvName);
                 $aboutData['cv'] = 'cv/' . $cvName;
             }
-            $ads = About::find($id)->update($aboutData);
+            $about = About::find($id)->update($aboutData);
                 $response = [
                     'message' => 'Updated successfully',
                     'status' => 200,
