@@ -1,30 +1,29 @@
 let host = document.location;
 
-let TableUrl = new URL('/admin/experience', host.origin);
-var table = $('#get_experience').DataTable({
+let TableUrl = new URL('/admin/skill', host.origin);
+var table = $('#get_skill').DataTable({
     processing: true,
     ajax: TableUrl,
     columns: [
         {data: "DT_RowIndex", name: "DT_RowIndex"},
+        {data: "type", name: "type"},
         {data: "title_en", name: "title_en"},
-        {data: "Learn_resource_en", name: "Learn_resource_en"},
-        {data: "description_en", name: "description_en"},
-        {data: "year_range", name: "year_range"},
+        {data: "percentage", name: "percentage"},
         {data: "status", name: "status"},
         {data: "action", name: "action"},
     ]
 });
-//  view modal experience
-$(document).on('click', '#ShowModalExperience', function (e) {
+//  view modal Skill
+$(document).on('click', '#ShowModalSkill', function (e) {
     e.preventDefault();
-    $('#modalExperienceAdd').modal('show');
+    $('#modalSkillAdd').modal('show');
 });
 
-let AddUrl = new URL('admin/experience', host.origin);
+let AddUrl = new URL('admin/skill', host.origin);
 // category admin
-$(document).on('click', '#addExperience', function (e) {
+$(document).on('click', '#addSkill', function (e) {
     e.preventDefault();
-    let formdata = new FormData($('#formExperienceAdd')[0]);
+    let formdata = new FormData($('#formSkillAdd')[0]);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -46,20 +45,20 @@ $(document).on('click', '#addExperience', function (e) {
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-success");
                 $('#error_message').text(response.message);
-                $('#modalExperienceAdd').modal('hide');
-                $('#formExperienceAdd')[0].reset();
+                $('#modalSkillAdd').modal('hide');
+                $('#formSkillAdd')[0].reset();
                 table.ajax.reload(null, false);
             }
         }
     });
 });
 
-let EditUrl = new URL('admin/experience', host.origin);
+let EditUrl = new URL('admin/skill', host.origin);
 // view modification data
-$(document).on('click', '#showModalEditExperience', function (e) {
+$(document).on('click', '#showModalEditSkill', function (e) {
     e.preventDefault();
     var id = $(this).data('id');
-    $('#modalExperienceUpdate').modal('show');
+    $('#modalSkillUpdate').modal('show');
     $.ajax({
         type: 'GET',
         url: EditUrl+'/' + id+'/edit',
@@ -72,19 +71,18 @@ $(document).on('click', '#showModalEditExperience', function (e) {
             } else {
                 $('#id').val(id);
                 $('#title_en').val(response.data.title_en);
-                $('#Learn_resource_en').val(response.data.Learn_resource_en);
-                $('#year_range').val(response.data.year_range);
-                $('#description_en').val(response.data.description_en);
+                $('#percentage').val(response.data.percentage);
+                $('#type').val(response.data.type);
                 $('#status').val(response.data.status);
             }
         }
     });
 });
 
-let UpdateUrl = new URL('admin/experience', host.origin);
-$(document).on('click', '#updateExperience', function (e) {
+let UpdateUrl = new URL('admin/skill', host.origin);
+$(document).on('click', '#updateSkill', function (e) {
     e.preventDefault();
-    let formdata = new FormData($('#formExperienceUpdate')[0]);
+    let formdata = new FormData($('#formSkillUpdate')[0]);
     var id = $('#id').val();
     $.ajaxSetup({
         headers: {
@@ -107,24 +105,24 @@ $(document).on('click', '#updateExperience', function (e) {
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-success");
                 $('#error_message').text(response.message);
-                $('#modalExperienceUpdate').modal('hide');
-                $('#formExperienceUpdate')[0].reset();
+                $('#modalSkillUpdate').modal('hide');
+                $('#formSkillUpdate')[0].reset();
                 table.ajax.reload(null, false);
             }
         }
     });
 });
 
-let DeleteUrl = new URL('admin/experience', host.origin);
-$(document).on('click', '#showModalDeleteExperience', function (e) {
+let DeleteUrl = new URL('admin/skill', host.origin);
+$(document).on('click', '#showModalDeleteSkill', function (e) {
     e.preventDefault();
     $('#nameDetele').val($(this).data('name'));
     var id = $(this).data('id');
-    $('#modalExperienceDelete').modal('show');
+    $('#modalSkillDelete').modal('show');
     gg(id);
 });
 function gg(id) {
-    $(document).off("click", "#deleteExperience").on("click", "#deleteExperience", function (e) {
+    $(document).off("click", "#deleteSkill").on("click", "#deleteSkill", function (e) {
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -147,7 +145,7 @@ function gg(id) {
                     $('#error_message').html("");
                     $('#error_message').addClass("alert alert-success");
                     $('#error_message').text(response.message);
-                    $('#modalExperienceDelete').modal('hide');
+                    $('#modalSkillDelete').modal('hide');
                     table.ajax.reload(null, false);
                 }
             }
@@ -155,7 +153,7 @@ function gg(id) {
     });
 }
 
-let statusUrl = new URL('admin/status/experience', host.origin);
+let statusUrl = new URL('admin/status/skill', host.origin);
 $(document).on('click', '#status', function (e) {
     e.preventDefault();
     var id = $(this).data('id');

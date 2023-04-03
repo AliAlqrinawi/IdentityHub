@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Education;
+use App\Models\Skill;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class EducationController extends Controller
+class SkillsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class EducationController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Education::get();
+            $data = Skill::get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('status', function ($row) {
@@ -28,8 +28,8 @@ class EducationController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<button class="modal-effect btn btn-sm btn-info"  style="margin: 5px" id="showModalEditEducation" data-id="' . $row->id . '"><i class="las la-pen"></i></button>';
-                    $btn = $btn . '<button class="modal-effect btn btn-sm btn-danger" id="showModalDeleteEducation" data-name="' . $row->title_en . '" data-id="' . $row->id . '"><i class="las la-trash"></i></button>';
+                    $btn = '<button class="modal-effect btn btn-sm btn-info"  style="margin: 5px" id="showModalEditSkill" data-id="' . $row->id . '"><i class="las la-pen"></i></button>';
+                    $btn = $btn . '<button class="modal-effect btn btn-sm btn-danger" id="showModalDeleteSkill" data-name="' . $row->title_en . '" data-id="' . $row->id . '"><i class="las la-trash"></i></button>';
                     return $btn;
                 })
                 ->rawColumns([
@@ -38,7 +38,7 @@ class EducationController extends Controller
                 ])
                 ->make(true);
         }
-        return view('dashboard.views-dash.education.index');
+        return view('dashboard.views-dash.skill.index');
     }
 
     /**
@@ -59,15 +59,15 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        $educationData = $request->all();
-        $validator = Validator($educationData, [
+        $skillData = $request->all();
+        $validator = Validator($skillData, [
+            'type' => 'required|in:PERSONAL,SOFTMARE',
             'title_en' => 'required|string|min:3|max:255',
-            'Learn_resource_en' => 'required|string|min:3|max:255',
-            'description_en' => 'required|string|min:3|max:255',
-            'year_range' => 'required|string|min:3|max:255',
+            'percentage' => 'required|numeric|min:3|between:0,100',
+            'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
-            $education = Education::create($educationData);
+            $skill = Skill::create($skillData);
                 $response = [
                     'message' => 'Added successfully',
                     'status' => 200,
@@ -101,12 +101,12 @@ class EducationController extends Controller
      */
     public function edit($id)
     {
-        $education = Education::find($id);
-        if($education){
+        $skill = Skill::find($id);
+        if($skill){
             $response = [
                 'message' => 'Found Data',
                 'status' => 200,
-                'data' => $education
+                'data' => $skill
             ];
             return ControllersService::responseSuccess($response);
         }else{
@@ -127,15 +127,15 @@ class EducationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $educationData = $request->all();
-        $validator = Validator($educationData, [
+        $skillData = $request->all();
+        $validator = Validator($skillData, [
+            'type' => 'required|string|min:3|max:255',
             'title_en' => 'required|string|min:3|max:255',
-            'Learn_resource_en' => 'required|string|min:3|max:255',
-            'description_en' => 'required|string|min:3|max:255',
-            'year_range' => 'required|string|min:3|max:255',
+            'percentage' => 'required|numeric|min:3|between:0,100',
+            'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
-            $education = Education::find($id)->update($educationData);
+            $skill = Skill::find($id)->update($skillData);
                 $response = [
                     'message' => 'Added successfully',
                     'status' => 200,
@@ -158,9 +158,9 @@ class EducationController extends Controller
      */
     public function destroy($id)
     {
-        $education = Education::find($id);
-        if($education){
-            $education->delete();
+        $skill = Skill::find($id);
+        if($skill){
+            $skill->delete();
             $response = [
                 'message' => 'Deleted successfully',
                 'status' => 200,
@@ -177,9 +177,9 @@ class EducationController extends Controller
 
     public function status($id)
     {
-        $education = Education::find($id);
-        if($education){
-            $education->changeStatus();
+        $skill = Skill::find($id);
+        if($skill){
+            $skill->changeStatus();
             $response = [
                 'message' => 'Updated successfully',
                 'status' => 200,

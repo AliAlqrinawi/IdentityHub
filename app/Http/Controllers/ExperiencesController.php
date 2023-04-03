@@ -6,7 +6,7 @@ use App\Models\Experience;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class ExperienceController extends Controller
+class ExperiencesController extends Controller
 {
     /**
      * Display a listing of the resource.
