@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Education;
+use App\Models\Experience;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class EducationController extends Controller
+class ExperienceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class EducationController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Education::get();
+            $data = Experience::get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('status', function ($row) {
@@ -28,8 +28,8 @@ class EducationController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<button class="modal-effect btn btn-sm btn-info"  style="margin: 5px" id="showModalEditEducation" data-id="' . $row->id . '"><i class="las la-pen"></i></button>';
-                    $btn = $btn . '<button class="modal-effect btn btn-sm btn-danger" id="showModalDeleteEducation" data-name="' . $row->title_en . '" data-id="' . $row->id . '"><i class="las la-trash"></i></button>';
+                    $btn = '<button class="modal-effect btn btn-sm btn-info"  style="margin: 5px" id="showModalEditExperience" data-id="' . $row->id . '"><i class="las la-pen"></i></button>';
+                    $btn = $btn . '<button class="modal-effect btn btn-sm btn-danger" id="showModalDeleteExperience" data-name="' . $row->title_en . '" data-id="' . $row->id . '"><i class="las la-trash"></i></button>';
                     return $btn;
                 })
                 ->rawColumns([
@@ -38,7 +38,7 @@ class EducationController extends Controller
                 ])
                 ->make(true);
         }
-        return view('dashboard.views-dash.education.index');
+        return view('dashboard.views-dash.experience.index');
     }
 
     /**
@@ -59,15 +59,15 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        $educationData = $request->all();
-        $validator = Validator($educationData, [
+        $experienceData = $request->all();
+        $validator = Validator($experienceData, [
             'title_en' => 'required|string|min:3|max:255',
             'Learn_resource_en' => 'required|string|min:3|max:255',
             'description_en' => 'required|string|min:3|max:255',
             'year_range' => 'required|string|min:3|max:255',
         ]);
         if (!$validator->fails()) {
-            $education = Education::create($educationData);
+            $experience = Experience::create($experienceData);
                 $response = [
                     'message' => 'Added successfully',
                     'status' => 200,
@@ -101,12 +101,12 @@ class EducationController extends Controller
      */
     public function edit($id)
     {
-        $education = Education::find($id);
-        if($education){
+        $experience = Experience::find($id);
+        if($experience){
             $response = [
                 'message' => 'Found Data',
                 'status' => 200,
-                'data' => $education
+                'data' => $experience
             ];
             return ControllersService::responseSuccess($response);
         }else{
@@ -127,15 +127,15 @@ class EducationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $educationData = $request->all();
-        $validator = Validator($educationData, [
+        $experienceData = $request->all();
+        $validator = Validator($experienceData, [
             'title_en' => 'required|string|min:3|max:255',
             'Learn_resource_en' => 'required|string|min:3|max:255',
             'description_en' => 'required|string|min:3|max:255',
             'year_range' => 'required|string|min:3|max:255',
         ]);
         if (!$validator->fails()) {
-            $education = Education::find($id)->update($educationData);
+            $experience = Experience::find($id)->update($experienceData);
                 $response = [
                     'message' => 'Added successfully',
                     'status' => 200,
@@ -158,9 +158,9 @@ class EducationController extends Controller
      */
     public function destroy($id)
     {
-        $education = Education::find($id);
-        if($education){
-            $education->delete();
+        $experience = Experience::find($id);
+        if($experience){
+            $experience->delete();
             $response = [
                 'message' => 'Deleted successfully',
                 'status' => 200,
@@ -177,9 +177,9 @@ class EducationController extends Controller
 
     public function status($id)
     {
-        $education = Education::find($id);
-        if($education){
-            $education->changeStatus();
+        $experience = Experience::find($id);
+        if($experience){
+            $experience->changeStatus();
             $response = [
                 'message' => 'Updated successfully',
                 'status' => 200,

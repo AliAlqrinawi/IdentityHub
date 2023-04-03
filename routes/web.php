@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,6 @@ Route::resource('about', AboutController::class);
 Route::put('status/about/{id}', [AboutController::class , 'status']);
 Route::resource('education', EducationController::class);
 Route::put('status/education/{id}', [EducationController::class , 'status']);
+Route::resource('experience', ExperienceController::class);
+Route::put('status/experience/{id}', [ExperienceController::class , 'status']);
 });
