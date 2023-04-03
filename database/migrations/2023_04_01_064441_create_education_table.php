@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('description_en');
             $table->string('description_ar')->nullable();
             $table->string('year_range');
+            $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });
     }

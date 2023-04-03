@@ -16,7 +16,6 @@ class AboutController extends Controller
     {
         if ($request->ajax()) {
             $data = About::get();
-
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('first_photo', function ($row) {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,6 @@ Route::group(
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('about', AboutController::class);
 Route::put('status/about/{id}', [AboutController::class , 'status']);
+Route::resource('education', EducationController::class);
+Route::put('status/education/{id}', [EducationController::class , 'status']);
 });
