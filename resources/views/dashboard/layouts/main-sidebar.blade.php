@@ -17,11 +17,11 @@
             <div class="dropdown user-pro-body">
                 <div class="">
                     <img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{  asset('assets/logo.png') ?? ''}}"><span
+                        src="{{ asset('/').App\Models\About::where('status' , 'ACTIVE')->first()->first_photo }}"><span
                         class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
-                    <h4 class="font-weight-semibold mt-3 mb-0"> {{ Auth::user()->first_name ?? ""}}</h4>
+                    <h4 class="font-weight-semibold mt-3 mb-0"> {{ Auth::user()->name ?? ""}}</h4>
                     <span class="mb-0 text-muted">{{ Auth::user()->email ?? ""}}</span>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <img class="side-menu__icon"
                         src="{{url('https://img.icons8.com/fluency/48/000000/dashboard-layout.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.dashboard')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">Home</span>
                 </a>
             </li>
             <li class="side-item side-item-category">General</li>
