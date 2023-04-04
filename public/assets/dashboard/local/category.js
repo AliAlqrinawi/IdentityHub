@@ -71,7 +71,7 @@ $(document).on('click', '#showModalEditCategory', function (e) {
                 $('#title_en').val(response.data.title_en);
                 $('#percentage').val(response.data.percentage);
                 $('#type').val(response.data.type);
-                $('#status').val(response.data.status);
+                $("#status option[value='"+response.data.status+"']").prop("selected", true);
             }
         }
     });

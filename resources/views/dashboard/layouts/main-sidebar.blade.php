@@ -29,7 +29,7 @@
         <ul class="side-menu">
             <li class="side-item side-item-category">Main</li>
             <li class="slide">
-                <a class="side-menu__item" href="">
+                <a class="side-menu__item" href="{{ route('home') }}">
                     <img class="side-menu__icon"
                         src="{{url('https://img.icons8.com/fluency/48/000000/dashboard-layout.png')}}"
                         style=" width: 30px; height: 30px;" />
@@ -37,17 +37,93 @@
                 </a>
             </li>
             <li class="side-item side-item-category">General</li>
-            @can('region-view')
             <li class="slide">
-                <a class="side-menu__item" href="{{ route('countries') }}">
-                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/344/region-code.png')}}"
+                <a class="side-menu__item" href="{{ route('about.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/info.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.regions')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">About</span>
                 </a>
             </li>
-            @endcan
 
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('service.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/1A6DFF/C822FF/service.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Service</span>
+                </a>
+            </li>
 
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('category.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/medium-priority.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Category</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('business.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/stock-share.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Business</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('education.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/student-female.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Education</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('experience.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/customer-insight.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Experience</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('skill.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/development-skill.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Skill</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('testimonial.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/1A6DFF/C822FF/good-quality.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Testimonial</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('blog.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/1A6DFF/C822FF/google-blog-search.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Blog</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('blog.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/1A6DFF/C822FF/email.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Contact</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('setting.index') }}">
+                    <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/1A6DFF/C822FF/settings.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">Setting</span>
+                </a>
+            </li>
 
         </ul>
     </div>

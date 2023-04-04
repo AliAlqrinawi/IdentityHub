@@ -134,7 +134,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Category :</label>
-                                    <select name="category_id" class="form-control">
+                                    <select id="category_id" name="category_id" class="form-control">
                                         @foreach ($categories as $value)
                                         <option value="{{ $value->id }}">{{ $value->title_en }}</option>
                                         @endforeach
@@ -143,7 +143,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Status :</label>
-                                    <select name="status" class="form-control">
+                                    <select id="status" name="status" class="form-control">
                                         <option value="ACTIVE">ACTIVE</option>
                                         <option value="NACTIVE">NACTIVE</option>
                                     </select>

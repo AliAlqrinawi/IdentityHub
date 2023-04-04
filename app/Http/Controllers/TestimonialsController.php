@@ -23,6 +23,10 @@ class TestimonialsController extends Controller
                     $avatar = '<img src="' . asset('/') . $row->avatar . '" alt="avatar" width="50" height="50">';
                     return $avatar;
                 })
+                ->addColumn('message', function ($row) {
+                    $message = '<textarea class="form-control" disabled="" style="width:180px; display:inline;">'.$row->message.'</textarea>';
+                    return $message;
+                })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 'ACTIVE') {
                         $status = '<button class="modal-effect btn btn-sm btn-success" style="margin: 5px" id="status" data-id="' . $row->id . '" ><i class=" icon-check"></i></button>';
@@ -38,22 +42,13 @@ class TestimonialsController extends Controller
                 })
                 ->rawColumns([
                     'avatar' => 'avatar',
+                    'message' => 'message',
                     'status' => 'status',
                     'action' => 'action',
                 ])
                 ->make(true);
         }
         return view('dashboard.views-dash.testimonial.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -92,17 +87,6 @@ class TestimonialsController extends Controller
             ];
             return ControllersService::responseErorr($response);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

@@ -19,6 +19,10 @@ class EducationsController extends Controller
             $data = Education::get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('description', function ($row) {
+                    $description = '<textarea class="form-control" disabled="" style="width:180px; display:inline;">'.$row->description_en.'</textarea>';
+                    return $description;
+                })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 'ACTIVE') {
                         $status = '<button class="modal-effect btn btn-sm btn-success" style="margin: 5px" id="status" data-id="' . $row->id . '" ><i class=" icon-check"></i></button>';
@@ -33,22 +37,13 @@ class EducationsController extends Controller
                     return $btn;
                 })
                 ->rawColumns([
+                    'description' => 'description',
                     'status' => 'status',
                     'action' => 'action',
                 ])
                 ->make(true);
         }
         return view('dashboard.views-dash.education.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -80,17 +75,6 @@ class EducationsController extends Controller
             ];
             return ControllersService::responseErorr($response);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

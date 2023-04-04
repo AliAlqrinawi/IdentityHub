@@ -19,73 +19,22 @@ class ContactsController extends Controller
             $data = Contact::get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('message', function ($row) {
+                    $message = '<textarea class="form-control" disabled="" style="width:180px; display:inline;">'.$row->message.'</textarea>';
+                    return $message;
+                })
                 ->addColumn('action', function ($row) {
                     // $btn = '<button class="modal-effect btn btn-sm btn-info"  style="margin: 5px" id="showModalEditContact" data-id="' . $row->id . '"><i class="las la-pen"></i></button>';
                     $btn = '<button class="modal-effect btn btn-sm btn-danger" id="showModalDeleteContact" data-name="' . $row->name . '" data-id="' . $row->id . '"><i class="las la-trash"></i></button>';
                     return $btn;
                 })
                 ->rawColumns([
-                    'status' => 'status',
+                    'message' => 'message',
                     'action' => 'action',
                 ])
                 ->make(true);
         }
         return view('dashboard.views-dash.contact.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

@@ -73,6 +73,8 @@ $(document).on('click', '#showModalEditBusiness', function (e) {
                 $('#id').val(id);
                 $('#title_en').val(response.data.title_en);
                 $('#sub_title_en').val(response.data.sub_title_en);
+                $("#category_id option[value='"+response.data.category_id+"']").prop("selected", true);
+                $("#status option[value='"+response.data.status+"']").prop("selected", true);
             }
         }
     });
