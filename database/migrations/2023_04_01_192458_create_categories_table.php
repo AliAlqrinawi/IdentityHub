@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title_en');
             $table->string('title_ar')->nullable();
+            $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });
     }

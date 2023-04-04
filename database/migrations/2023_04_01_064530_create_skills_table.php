@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title_en');
             $table->string('title_ar')->nullable();
             $table->string('percentage');
+            $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });
     }

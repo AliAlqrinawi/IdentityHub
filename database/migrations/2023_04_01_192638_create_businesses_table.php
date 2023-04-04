@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('sub_title_ar')->nullable();
             $table->foreignId('category_id');
             $table->foreign('category_id')->on('categories')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });
     }

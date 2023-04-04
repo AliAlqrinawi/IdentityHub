@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutsController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\HomeController;
@@ -42,4 +43,6 @@ Route::resource('experience', ExperiencesController::class);
 Route::put('status/experience/{id}', [ExperiencesController::class , 'status']);
 Route::resource('skill', SkillsController::class);
 Route::put('status/skill/{id}', [SkillsController::class , 'status']);
+Route::resource('category', CategoriesController::class);
+Route::put('status/category/{id}', [CategoriesController::class , 'status']);
 });
