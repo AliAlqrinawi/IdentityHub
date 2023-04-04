@@ -18,4 +18,9 @@ class Business extends Model
             $this->update(['status' => 'ACTIVE']);
         }
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
