@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('question_ar')->nullable();
             $table->string('description_en');
             $table->string('description_ar')->nullable();
+            $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });
     }
