@@ -93,7 +93,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Status :</label>
-                                    <select name="status" class="form-control">
+                                    <select id="status" name="status" class="form-control">
                                         <option value="ACTIVE">ACTIVE</option>
                                         <option value="NACTIVE">NACTIVE</option>
                                     </select>

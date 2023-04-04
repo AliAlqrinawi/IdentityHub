@@ -204,7 +204,7 @@
 
                                 <div class="form-group col-md-12">
                                     <label class="form-label">Status :</label>
-                                    <select name="status" class="form-control">
+                                    <select name="status" id="status" class="form-control">
                                         <option value="ACTIVE">ACTIVE</option>
                                         <option value="NACTIVE">NACTIVE</option>
                                     </select>

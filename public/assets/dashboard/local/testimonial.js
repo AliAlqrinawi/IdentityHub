@@ -74,6 +74,7 @@ $(document).on('click', '#showModalEditTestimonial', function (e) {
                 $('#name').val(response.data.name);
                 $('#job_title').val(response.data.job_title);
                 $('#message').val(response.data.message);
+                $("#status option[value='"+response.data.status+"']").prop("selected", true);
             }
         }
     });

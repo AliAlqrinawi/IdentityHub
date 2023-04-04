@@ -8,8 +8,8 @@ var table = $('#get_blog').DataTable({
         {data: "DT_RowIndex", name: "DT_RowIndex"},
         {data: "image", name: "image"},
         {data: "title_en", name: "title_en"},
-        {data: "answer_en", name: "answer_en"},
-        {data: "question_en", name: "question_en"},
+        {data: "question", name: "question"},
+        {data: "answer", name: "answer"},
         {data: "status", name: "status"},
         {data: "action", name: "action"},
     ]
@@ -74,6 +74,7 @@ $(document).on('click', '#showModalEditBlog', function (e) {
                 $('#title_en').val(response.data.title_en);
                 $('#answer_en').val(response.data.answer_en);
                 $('#question_en').val(response.data.question_en);
+                $("#status option[value='"+response.data.status+"']").prop("selected", true);
             }
         }
     });

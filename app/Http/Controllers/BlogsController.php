@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
+use Illuminate\Support\Str;
 class BlogsController extends Controller
 {
     /**
@@ -22,6 +22,14 @@ class BlogsController extends Controller
                 ->addColumn('image', function ($row) {
                     $image = '<img src="' . asset('/') . $row->image . '" alt="image" width="50" height="50">';
                     return $image;
+                })
+                ->addColumn('question', function ($row) {
+                    $question = Str::limit($row->question_en, 10 , ' ...');;
+                    return $question;
+                })
+                ->addColumn('answer', function ($row) {
+                    $answer = Str::limit($row->answer_en, 10 , ' ...?');;
+                    return $answer;
                 })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 'ACTIVE') {
@@ -44,16 +52,6 @@ class BlogsController extends Controller
                 ->make(true);
         }
         return view('dashboard.views-dash.blog.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -92,17 +90,6 @@ class BlogsController extends Controller
             ];
             return ControllersService::responseErorr($response);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

@@ -27,6 +27,14 @@ class ServicesController extends Controller
                     $image = '<img src="' . asset('/') . $row->detail_image . '" alt="image" width="50" height="50">';
                     return $image;
                 })
+                ->addColumn('description', function ($row) {
+                    $description = '<textarea class="form-control" disabled="" style="width:180px; display:inline;">'.$row->description_en.'</textarea>';
+                    return $description;
+                })
+                ->addColumn('detail_description', function ($row) {
+                    $detail_description = '<textarea class="form-control" disabled="" style="width:180px; display:inline;">'.$row->detail_description.'</textarea>';
+                    return $detail_description;
+                })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 'ACTIVE') {
                         $status = '<button class="modal-effect btn btn-sm btn-success" style="margin: 5px" id="status" data-id="' . $row->id . '" ><i class=" icon-check"></i></button>';
@@ -43,22 +51,14 @@ class ServicesController extends Controller
                 ->rawColumns([
                     'logo' => 'logo',
                     'detail_image' => 'detail_image',
+                    'description' => 'description',
+                    'detail_description' => 'detail_description',
                     'status' => 'status',
                     'action' => 'action',
                 ])
                 ->make(true);
         }
         return view('dashboard.views-dash.service.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -105,17 +105,6 @@ class ServicesController extends Controller
             ];
             return ControllersService::responseErorr($response);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

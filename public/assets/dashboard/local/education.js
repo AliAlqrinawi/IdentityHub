@@ -8,7 +8,7 @@ var table = $('#get_education').DataTable({
         {data: "DT_RowIndex", name: "DT_RowIndex"},
         {data: "title_en", name: "title_en"},
         {data: "Learn_resource_en", name: "Learn_resource_en"},
-        {data: "description_en", name: "description_en"},
+        {data: "description", name: "description"},
         {data: "year_range", name: "year_range"},
         {data: "status", name: "status"},
         {data: "action", name: "action"},
@@ -75,7 +75,7 @@ $(document).on('click', '#showModalEditEducation', function (e) {
                 $('#Learn_resource_en').val(response.data.Learn_resource_en);
                 $('#year_range').val(response.data.year_range);
                 $('#description_en').val(response.data.description_en);
-                $('#status').val(response.data.status);
+                $("#status option[value='"+response.data.status+"']").prop("selected", true);
             }
         }
     });

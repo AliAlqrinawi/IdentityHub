@@ -81,7 +81,7 @@ $(document).on('click', '#showModalEditAboutMe', function (e) {
                 $('#job_title_en').val(response.data.job_title_en);
                 $('#job_description_en').val(response.data.job_description_en);
                 $('#about_en').val(response.data.about_en);
-                $('#status').val(response.data.status);
+                $("#status option[value='"+response.data.status+"']").prop("selected", true);
             }
         }
     });

@@ -8,9 +8,9 @@ var table = $('#get_service').DataTable({
         {data: "DT_RowIndex", name: "DT_RowIndex"},
         {data: "logo", name: "logo"},
         {data: "title_en", name: "title_en"},
-        {data: "description_en", name: "description_en"},
+        {data: "description", name: "description"},
         {data: "detail_title_en", name: "detail_title_en"},
-        {data: "detail_description_en", name: "detail_description_en"},
+        {data: "detail_description", name: "detail_description"},
         {data: "status", name: "status"},
         {data: "action", name: "action"},
     ]
@@ -76,6 +76,7 @@ $(document).on('click', '#showModalEditService', function (e) {
                 $('#detail_title_en').val(response.data.detail_title_en);
                 $('#detail_description_en').val(response.data.detail_description_en);
                 $('#description_en').val(response.data.description_en);
+                $("#status option[value='"+response.data.status+"']").prop("selected", true);
             }
         }
     });
