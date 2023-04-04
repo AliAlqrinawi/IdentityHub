@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutsController;
+use App\Http\Controllers\BusinessesController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ExperiencesController;
@@ -20,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('profile.home.index');
-// });
+Route::get('/', function () {
+    return view('profile.home.index');
+});
 
 Auth::routes();
 
@@ -45,4 +46,6 @@ Route::resource('skill', SkillsController::class);
 Route::put('status/skill/{id}', [SkillsController::class , 'status']);
 Route::resource('category', CategoriesController::class);
 Route::put('status/category/{id}', [CategoriesController::class , 'status']);
+Route::resource('business', BusinessesController::class);
+Route::put('status/business/{id}', [BusinessesController::class , 'status']);
 });
