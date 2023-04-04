@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutsController;
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\BusinessesController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EducationsController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SkillsController;
+use App\Http\Controllers\TestimonialsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,4 +53,8 @@ Route::resource('business', BusinessesController::class);
 Route::put('status/business/{id}', [BusinessesController::class , 'status']);
 Route::resource('service', ServicesController::class);
 Route::put('status/service/{id}', [ServicesController::class , 'status']);
+Route::resource('testimonial', TestimonialsController::class);
+Route::put('status/testimonial/{id}', [TestimonialsController::class , 'status']);
+Route::resource('blog', BlogsController::class);
+Route::put('status/blog/{id}', [BlogsController::class , 'status']);
 });

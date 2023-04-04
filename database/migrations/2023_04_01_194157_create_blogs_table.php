@@ -18,13 +18,10 @@ return new class extends Migration
             $table->string('image');
             $table->string('title_en');
             $table->string('title_ar')->nullable();
+            $table->string('question_en');
+            $table->string('question_ar')->nullable();
             $table->string('description_en');
             $table->string('description_ar')->nullable();
-            $table->string('detail_image');
-            $table->string('detail_title_en');
-            $table->string('detail_title_ar')->nullable();
-            $table->string('detail_description_en');
-            $table->string('detail_description_ar')->nullable();
             $table->timestamps();
         });
     }
