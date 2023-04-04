@@ -14,8 +14,7 @@
     <div class="left-content">
         <div>
             <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
-                {{trans('dashboard.Wellcome') . " " . Auth::user()->name}} !</h2>
-            {{--						  <p class="mg-b-0">Sales monitoring dashboard template.</p>--}}
+                {{ 'Wellcome' . " " . Auth::user()->name}} !</h2>
         </div>
     </div>
 
@@ -30,12 +29,12 @@
         <div class="card overflow-hidden sales-card bg-primary-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h6 class="mb-3 tx-24 text-white">{{trans('dashboard.Custmer')}}</h6>
+                    <h6 class="mb-3 tx-24 text-white">Services</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ 20 }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Service::count() }}</h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -49,12 +48,12 @@
         <div class="card overflow-hidden sales-card bg-danger-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h6 class="mb-3 tx-24 text-white">{{trans('dashboard.Orders')}}</h6>
+                    <h6 class="mb-3 tx-24 text-white">Skills</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ 10 }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Skill::count() }}</h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -69,12 +68,12 @@
         <div class="card overflow-hidden sales-card bg-success-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h6 class="mb-3 tx-24 text-white">{{trans('dashboard.total_bills')}}</h6>
+                    <h6 class="mb-3 tx-24 text-white">Contact Me</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{  500 }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{  App\Models\Contact::count() }}</h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -90,78 +89,30 @@
             <div class="card mg-b-20">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-                        {{trans('home.chart')}}
+                        Flipchart
                     </div>
-                    <p class="mg-b-20">{{trans('home.number_chart')}}</p>
+                    <p class="mg-b-20">A weekly chart of communication messages and services you provide</p>
                     <div id="echart2"  class="ht-300"></div>
                 </div>
             </div>
         </div>
     </div>
-<div class="row row-sm">
-    <div class="col-lg-12 col-md-12">
-        <div class="card mg-b-20">
-            <div class="card-body">
-                <div class="main-content-label mg-b-5">
-                    مخطط توضيحى لأجمالى الفواتير
-                </div>
-                <p class="mg-b-20">رسم توضيحى لأجمالى الفواتير المحصلة شهريا</p>
-                <div id="echart1" class="ht-300"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Container closed -->
 </div>
 @endsection
 @section('js')
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
-    <!--Internal  Datatable js -->
-    <script src="{{ URL::asset('assets/dashboard/js/table-data.js') }}"></script>
     <script src="{{ URL::asset('assets/dashboard/js/modal.js') }}"></script>
     <!--Internal  Chart.bundle js -->
     <script src="{{URL::asset('assets/dashboard/plugins/chart.js/Chart.bundle.min.js')}}"></script>
     <!-- Moment js -->
     <script src="{{URL::asset('assets/dashboard/plugins/raphael/raphael.min.js')}}"></script>
     <!--Internal  Flot js-->
-    <script src="{{URL::asset('assets/dashboard/plugins/jquery.flot/jquery.flot.js')}}"></script>
-    <script src="{{URL::asset('assets/dashboard/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{URL::asset('assets/dashboard/plugins/jquery.flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{URL::asset('assets/dashboard/plugins/jquery.flot/jquery.flot.categories.js')}}"></script>
-    <script src="{{URL::asset('assets/dashboard/js/dashboard.sampledata.js')}}"></script>
-    <script src="{{URL::asset('assets/dashboard/js/chart.flot.sampledata.js')}}"></script>
-    <!--Internal Apexchart js-->
     <script src="{{URL::asset('assets/dashboard/js/apexcharts.js')}}"></script>
     <!-- Internal Map -->
-    <script src="{{URL::asset('assets/dashboard/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-    <script src="{{URL::asset('assets/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
     <script src="{{URL::asset('assets/dashboard/js/modal-popup.js')}}"></script>
     <!--Internal  index js -->
     <script src="{{URL::asset('assets/dashboard/js/index.js')}}"></script>
-    <script src="{{URL::asset('assets/dashboard/js/jquery.vmap.sampledata.js')}}"></script>
-
-    <script src="{{URL::asset('assets/dashboard/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-    <!-- Internal Select2 js-->
-    <script src="{{URL::asset('assets/dashboard/plugins/select2/js/select2.min.js')}}"></script>
-    <!--Internal Echart Plugin -->
     <script src="{{URL::asset('assets/dashboard/plugins/echart/echart.js')}}"></script>
-    {{--    <script src="{{URL::asset('assets/js/echarts.js')}}"></script>--}}
 
     <script>
         $('#modaldemo9').on('show.bs.modal', function(event) {
@@ -178,103 +129,20 @@
 
         $(function(e) {
             'use strict'
-            /*----Echart2----*/
-            var chartdata = [{
-                name: 'اجمالي الفواتير',
-                type: 'bar',
-                barMaxWidth: 20,
-                data: [0,1,5,25,30,40,100]
-            }
-            {{--,--}}
-            {{--    {--}}
-            {{--    name: '{{trans('home.orders')}}',--}}
-            {{--    type: 'bar',--}}
-            {{--    barMaxWidth: 20,--}}
-            {{--    // data: [3,50,20,25,50,20,80]--}}
-            {{--    data: @json($orders)--}}
-            {{--}--}}
-            ];
-            var chart = document.getElementById('echart1');
-            var barChart = echarts.init(chart);
-            var option = {
-                valueAxis: {
-                    axisLine: {
-                        lineStyle: {
-                            color: 'rgba(171, 167, 167,0.2)'
-                        }
-                    },
-                    splitArea: {
-                        show: true,
-                        areaStyle: {
-                            color: ['rgba(171, 167, 167,0.2)']
-                        }
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            color: ['rgba(171, 167, 167,0.2)']
-                        }
-                    }
-                },
-                grid: {
-                    top: '6',
-                    right: '0',
-                    bottom: '17',
-                    left: '25',
-                },
-                xAxis: {
-                    data: [0,1,5,25,30,40,100],
-                    axisLine: {
-                        lineStyle: {
-                            color: 'rgba(171, 167, 167,0.2)'
-                        }
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            color: 'rgba(171, 167, 167,0.2)'
-                        }
-                    },
-                    axisLabel: {
-                        fontSize: 10,
-                        color: '#5f6d7a'
-                    }
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    position: ['35%', '32%'],
-                },
-                yAxis: {
-                    splitLine: {
-                        lineStyle: {
-                            color: 'rgba(171, 167, 167,0.2)'
-                        }
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            color: 'rgba(171, 167, 167,0.2)'
-                        }
-                    },
-                    axisLabel: {
-                        fontSize: 10,
-                        color: '#5f6d7a'
-                    }
-                },
-                series: chartdata,
-                color: ['#285cf7', '#f7557a' ]
-            };
-            barChart.setOption(option);
-
             var chartdata2 = [{
-                name: '{{trans('home.products')}}',
+                name: 'Services',
                 type: 'line',
                 smooth: true,
-                data: [10, 15, 9, 18, 10, 15],
+                // data: [10, 15, 9, 18, 10, 15],
+                data: @json($services),
                 color: ['#285cf7']
             }, {
-                name: '{{trans('home.orders')}}',
+                name: 'Contact Me',
                 type: 'line',
                 smooth: true,
                 size: 10,
-                data: [10, 14, 10, 15, 9, 25],
+                // data: [10, 14, 10, 15, 9, 25],
+                data: @json($contacts),
                 color: ['#f7557a']
             }];
             var chart2 = document.getElementById('echart2');
@@ -287,7 +155,8 @@
                     left: '25',
                 },
                 xAxis: {
-                    data: ['2014', '2015', '2016', '2017', '2018', '2019'],
+                    // data: ['2014', '2015', '2016', '2017', '2018', '2019'],
+                    data: @json($date),
                     splitLine: {
                         lineStyle: {
                             color: 'rgba(171, 167, 167,0.2)'
@@ -327,9 +196,6 @@
                 color: ['#285cf7', '#f7557a' ]
             };
             barChart2.setOption(option2);
-
-
-
             /*----BarChartEchart----*/
             var echartBar = echarts.init(document.getElementById('index'), {
                 color: ['#285cf7', '#f7557a'],
@@ -415,7 +281,7 @@
                 series: [{
                     name: 'View Price',
                     type: 'bar',
-                    data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                    data:@json($date),
                     markPoint: {
                         data: [{
                             type: 'max',
@@ -456,9 +322,6 @@
                     }
                 }]
             });
-
-
-
         });
 
     </script>
@@ -499,12 +362,6 @@
             modal.find('.modal-body #delivery_cost').html(delivery_cost);
             modal.find('.modal-body #delivery_time').html(delivery_time);
             modal.find('.modal-body #notes').html(notes);
-
-
-
-
-
         })
-
     </script>
 @endsection
