@@ -9,9 +9,12 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\profile\ContactMeController;
+use App\Http\Controllers\profile\ProfileController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\TestimonialsController;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +29,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('profile.home.index');
-});
+Route::get('/', [ProfileController::class, 'index']);
 
 Auth::routes();
 
@@ -60,3 +61,13 @@ Route::put('status/blog/{id}', [BlogsController::class , 'status']);
 Route::resource('contact', ContactsController::class)->only(['index' , 'destroy']);
 Route::resource('setting', SettingsController::class)->only(['index' , 'update']);
 });
+
+Route::group(
+    [
+        'prefix' => 'user',
+    ], function () {
+        Route::get('/contact', [ContactMeController::class, 'store'])->name('contact.store');
+});
+
+Route::post('modal/contact.php', [ContactMeController::class, 'store'])->name('contact.store')
+;

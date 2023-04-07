@@ -6,10 +6,10 @@
 <meta name="author" content="Marketify">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Know | Home</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- STYLES -->
 <link  href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/profile/css/plugins.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/profile/css/dark.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/profile/css/style.css') }}">
@@ -58,7 +58,7 @@
 						</ul>
 					</div>
 					<div class="know_tm_button">
-						<a href="img/cv/1.jpg" download="">Download CV</a>
+						<a href="{{ asset('/') .  $aboutMe->cv }}" download="">Download CV</a>
 					</div>
 				</div>
 			</div>
@@ -75,8 +75,8 @@
 					<div class="main_info">
 						<div class="left">
 							<span class="subtitle">I'm</span>
-							<h3 class="name">Jessica Parker</h3>
-							<p class="text">A passionate UI/UX Designer and Web Developer based In NYC, USA</p>
+							<h3 class="name">{{ $aboutMe->name_en }}</h3>
+							<p class="text">{{ $aboutMe->job_description_en }}</p>
 							<div class="know_tm_video">
 								<div class="video_inner">
 									<div class="circle"></div>
@@ -88,7 +88,7 @@
 						<div class="right">
 							<div class="image">
 								<img src="{{ asset('assets/profile/img/thumbs/47-60.jpg') }}" alt="">
-								<div class="main" data-img-url="{{ asset('assets/profile/img/hero/1.jpg') }}"></div>
+								<div class="main" data-img-url="{{ asset('/') .  $aboutMe->first_photo }}"></div>
 							</div>
 						</div>
 					</div>
@@ -172,33 +172,33 @@
 						<div class="left_inner">
 							<div class="image">
 								<img src="{{ asset('assets/profile/img/thumbs/35-44.jpg') }}" alt="">
-								<div class="main" data-img-url="{{ asset('img/about/1.jpg') }}"></div>
+								<div class="main" data-img-url="{{ asset('/') .  $aboutMe->second_photo }}"></div>
 							</div>
 							<div class="details">
 								<ul>
 									<li>
 										<h3>Name</h3>
-										<span>Tom Anderson</span>
+										<span>{{ $aboutMe->name_en }}</span>
 									</li>
 									<li>
 										<h3>Birthday</h3>
-										<span>April 22, 1990</span>
+										<span>{{    \Carbon\Carbon::parse($aboutMe->Birthday)->format('F d, Y')  }}</span>
 									</li>
 									<li>
 										<h3>Mail</h3>
-										<span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b535e5757547b5a555f5e4948545515585456">[email&#160;protected]</a></span>
+										<span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b535e5757547b5a555f5e4948545515585456">{{ $aboutMe->Mail }}</a></span>
 									</li>
 									<li>
 										<h3>Phone</h3>
-										<span>+123 456 7890</span>
+										<span>{{ $aboutMe->Phone }}</span>
 									</li>
 									<li>
 										<h3>Address</h3>
-										<span>20, Bardeshi, Dhaka</span>
+										<span>{{ $aboutMe->Address_en }}</span>
 									</li>
 									<li>
 										<h3>Nationality</h3>
-										<span>Bangladeshi</span>
+										<span>{{ $aboutMe->Nationality_en }}</span>
 									</li>
 								</ul>
 							</div>
@@ -207,16 +207,16 @@
 					<div class="right">
 						<div class="know_tm_main_title">
 							<span>About Me</span>
-							<h3>World leading UI/UX designer</h3>
+							<h3>{{ $aboutMe->job_title_en }}</h3>
 						</div>
 						<div class="bigger_text">
-							<p>A passionate UI/UX Designer and Web Developer based In NYC, USA</p>
+							<p>{{ $aboutMe->job_description_en }}</p>
 						</div>
 						<div class="text">
-							<p>Hi! My name is Jessica Parker. I am UI/UX designer, and I'm very passionate and dedicated to my work. With 20 years experience as a professional graphic designer, I have acquired the skills and knowledge necessary to make your project a success.</p>
+							<p>{{ $aboutMe->about_en }}</p>
 						</div>
 						<div class="know_tm_button">
-							<a href="img/cv/1.jpg" download="">Download CV</a>
+							<a href="{{ asset('/') .  $aboutMe->cv }}" download="">Download CV</a>
 						</div>
 					</div>
 				</div>
@@ -232,104 +232,65 @@
 					</div>
 					<div class="resume_inner">
 						<div class="left">
+                            @if($education->isNotEmpty())
 							<div class="info_list">
 								<div class="know_tm_resume_title">
 									<h3>Education</h3>
 									<span class="shape"></span>
 								</div>
 								<ul>
-									<li>
+                                    @foreach ($education as $value)
+                                    <li>
 										<div class="list_inner">
 											<div class="short">
 												<div class="job">
-													<h3>Cognitive Sciences</h3>
-													<span>University of Maine</span>
+													<h3>{{ $value->title_en }}</h3>
+													<span>{{ $value->Learn_resource_en }}</span>
 												</div>
 												<div class="year">
-													<span>2018 - 2020</span>
+													<span>{{ $value->year_range }}</span>
 												</div>
 											</div>
 											<div class="text">
-												<p>The goal of cognitive science is to understand the principles of intelligence with the hope that this will lead to better comprehension.</p>
+												<p>{{ $value->description_en }}</p>
 											</div>
 										</div>
 									</li>
-									<li>
-										<div class="list_inner">
-											<div class="short">
-												<div class="job">
-													<h3>Civil Engineering</h3>
-													<span>University of Texas</span>
-												</div>
-												<div class="year">
-													<span>2016 - 2017</span>
-												</div>
-											</div>
-											<div class="text">
-												<p>Civil engineering is arguably the oldest engineering discipline. It deals with the built environment and can be dated to the first time someone placed a roof.</p>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="list_inner">
-											<div class="short">
-												<div class="job">
-													<h3>Bachelor of Science</h3>
-													<span>Univercity of Dhaka</span>
-												</div>
-												<div class="year">
-													<span>2012 - 2015</span>
-												</div>
-											</div>
-											<div class="text">
-												<p>This project is called a thesis and is usually presented in front of a group of people, including university professors who will evaluate it and let the student..</p>
-											</div>
-										</div>
-									</li>
+                                    @endforeach
 								</ul>
 							</div>
+                            @endif
+                            @if($experience->isNotEmpty())
 							<div class="info_list">
 								<div class="know_tm_resume_title">
 									<h3>Experience</h3>
 									<span class="shape"></span>
 								</div>
 								<ul>
-									<li>
+									@foreach ($experience as $value)
+                                    <li>
 										<div class="list_inner">
 											<div class="short">
 												<div class="job">
-													<h3>UI/UX Designer</h3>
-													<span>Envato Market</span>
+													<h3>{{ $value->title_en }}</h3>
+													<span>{{ $value->Learn_resource_en }}</span>
 												</div>
 												<div class="year">
-													<span>2018 - running</span>
+													<span>{{ $value->year_range }}</span>
 												</div>
 											</div>
 											<div class="text">
-												<p>Web Developers are build a website’s core structure using coding languages, while designers are more visually creative and user-focused.</p>
+												<p>{{ $value->description_en }}</p>
 											</div>
 										</div>
 									</li>
-									<li>
-										<div class="list_inner">
-											<div class="short">
-												<div class="job">
-													<h3>Creative Designer</h3>
-													<span>Bahanno Digital</span>
-												</div>
-												<div class="year">
-													<span>2015 - 2017</span>
-												</div>
-											</div>
-											<div class="text">
-												<p>Web Developers are build a website’s core structure using coding languages, while designers are more visually creative and user-focused.</p>
-											</div>
-										</div>
-									</li>
+                                    @endforeach
 								</ul>
 							</div>
+                            @endif
 						</div>
 						<div class="right">
+                            @if($personal_skill->isNotEmpty())
 							<div class="skills_list">
 								<div class="know_tm_resume_title">
 									<h3>Personal Skills</h3>
@@ -337,21 +298,17 @@
 								</div>
 								<div class="personal">
 									<div class="dodo_progress">
-										<div class="progress_inner" data-value="90">
-											<span><span class="label">Time Management</span><span class="number">90%</span></span>
+                                        @foreach ($personal_skill as $value)
+										<div class="progress_inner" data-value="{{ $value->percentage }}">
+											<span><span class="label">{{ $value->title_en }}</span><span class="number">{{ $value->percentage }}%</span></span>
 											<div class="background"><div class="bar"><div class="bar_in"></div></div></div>
 										</div>
-										<div class="progress_inner" data-value="70">
-											<span><span class="label">Effeciency</span><span class="number">70%</span></span>
-											<div class="background"><div class="bar"><div class="bar_in"></div></div></div>
-										</div>
-										<div class="progress_inner" data-value="80">
-											<span><span class="label">Intigrity</span><span class="number">80%</span></span>
-											<div class="background"><div class="bar"><div class="bar_in"></div></div></div>
-										</div>
+                                        @endforeach
 									</div>
 								</div>
 							</div>
+                            @endif
+                            @if($personal_skill->isNotEmpty())
 							<div class="skills_list">
 								<div class="know_tm_resume_title">
 									<h3>Software Skills</h3>
@@ -360,34 +317,19 @@
 								<div class="software">
 									<div class="circular_progress_bar">
 										<ul>
+                                            @foreach ($software_skill as $value)
 											<li>
 												<div class="list_inner">
-													<div class="myCircle" data-value="0.8"></div>
-													<div class="title"><h3>Ms Office</h3></div>
+													<div class="myCircle" data-value="{{ $value->percentage }}"></div>
+													<div class="title"><h3>{{ $value->title_en }}</h3></div>
 												</div>
 											</li>
-											<li>
-												<div class="list_inner">
-													<div class="myCircle" data-value="0.75"></div>
-													<div class="title"><h3>Photoshop</h3></div>
-												</div>
-											</li>
-											<li>
-												<div class="list_inner">
-													<div class="myCircle" data-value="0.9"></div>
-													<div class="title"><h3>Illustrator</h3></div>
-												</div>
-											</li>
-											<li>
-												<div class="list_inner">
-													<div class="myCircle" data-value="0.65"></div>
-													<div class="title"><h3>Figma</h3></div>
-												</div>
-											</li>
+                                            @endforeach
 										</ul>
 									</div>
 								</div>
 							</div>
+                            @endif
 						</div>
 					</div>
 				</div>
@@ -430,11 +372,11 @@
 							<li class="youtube">
 								<div class="list_inner">
 									<div class="image">
-										<img src="img/thumbs/1-1.jpg" alt="">
+										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
 										<div class="main" data-img-url="{{ asset('img/portfolio/2.jpg') }}"></div>
 									</div>
 									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('img/svg/social/youtube-2.svg') }}" alt="">
+									<img class="svg" src="{{ asset('assets/profile/img/svg/social/youtube-2.svg') }}" alt="">
 									<div class="details">
 										<span>Youtube</span>
 										<h3>Bicker &amp; Jenna</h3>
@@ -445,7 +387,7 @@
 							<li class="soundcloud">
 								<div class="list_inner">
 									<div class="image">
-										<img src="img/thumbs/1-1.jpg" alt="">
+										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
 										<div class="main" data-img-url="{{ asset('img/portfolio/3.jpg') }}"></div>
 									</div>
 									<div class="overlay"></div>
@@ -476,11 +418,11 @@
 							<li class="vimeo">
 								<div class="list_inner">
 									<div class="image">
-										<img src="{{ asset('img/thumbs/1-1.jpg') }}" alt="">
+										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
 										<div class="main" data-img-url="{{ asset('img/portfolio/7.jpg') }}"></div>
 									</div>
 									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('img/svg/social/vimeo.svg') }}" alt="">
+									<img class="svg" src="{{ asset('assets/profile/img/svg/social/vimeo.svg') }}" alt="">
 									<div class="details">
 										<span>Vimeo</span>
 										<h3>Smart Watch</h3>
@@ -526,9 +468,9 @@
 														<li>
 															<span class="first">Share</span>
 															<ul class="share">
-																<li><a href="#"><img class="svg" src="{{ asset('img/svg/social/facebook.svg') }}" alt=""></a></li>
-																<li><a href="#"><img class="svg" src="{{ asset('img/svg/social/twitter.svg') }}" alt=""></a></li>
-																<li><a href="#"><img class="svg" src="{{ asset('img/svg/social/instagram.svg') }}" alt=""></a>
+																<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/facebook.svg') }}" alt=""></a></li>
+																<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/twitter.svg') }}" alt=""></a></li>
+																<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/instagram.svg') }}" alt=""></a>
 																</li>
 															</ul>
 														</li>
@@ -540,15 +482,15 @@
 													<li>
 														<div class="list_inner">
 															<div class="my_image">
-																<img src="{{ asset('img/thumbs/4-2.jpg') }}" alt="">
-																<div class="main" data-img-url="{{ asset('img/portfolio/1.jpg') }}"></div>
+																<img src="{{ asset('assets/profile/img/thumbs/4-2.jpg') }}" alt="">
+																<div class="main" data-img-url="{{ asset('assets/profile/img/portfolio/1.jpg') }}"></div>
 															</div>
 														</div>
 													</li>
 													<li>
 														<div class="list_inner">
 															<div class="my_image">
-																<img src="{{ asset('img/thumbs/4-2.jp') }}" alt="">
+																<img src="{{ asset('assets/profile/img/thumbs/4-2.jpg') }}" alt="">
 																<div class="main" data-img-url="{{ asset('img/portfolio/2.jpg') }}"></div>
 															</div>
 														</div>
@@ -556,7 +498,7 @@
 													<li>
 														<div class="list_inner">
 															<div class="my_image">
-																<img src="{{ asset('img/thumbs/4-2.jpg') }}" alt="">
+																<img src="{{ asset('assets/profile/img/thumbs/4-2.jpg') }}" alt="">
 																<div class="main" data-img-url="{{ asset('img/portfolio/3.jpg') }}"></div>
 															</div>
 														</div>
@@ -573,7 +515,7 @@
 				</div>
 			</div>
 			<!-- /PORTFOLIO -->
-
+            @if($service->isNotEmpty())
 			<!-- SERVICES -->
 			<div id="service" class="know_tm_main_section">
 				<div class="know_tm_services">
@@ -583,138 +525,34 @@
 					</div>
 					<div class="service_list">
 						<ul>
+                            @foreach ($service as $value)
 							<li>
 								<div class="list_inner">
-									<span class="icon"><img class="svg" src="img/svg/squares.svg" alt=""></span>
-									<h3 class="title">Wireframing</h3>
-									<p class="text">Web development is the building and maintenance of websites. it’s the work that...</p>
+									<span class="icon"><img class="svg" src="{{ asset('/') . $value->logo }}" alt=""></span>
+									<h3 class="title">{{ $value->title_en }}</h3>
+									<p class="text">{{ Str::limit($value->description_en, 20, '...')  }}</p>
 									<a class="know_tm_full_link" href="#"></a>
 									<div class="hidden_content">
 										<div class="service_informations">
 											<div class="image">
-												<img src="img/thumbs/4-2.jpg" alt="">
-												<div class="main" data-img-url="img/service/1.jpg"></div>
+												<img src="{{ asset('/') . $value->detail_image }}" alt="">
+												<div class="main" data-img-url="{{ asset('/') . $value->detail_image }}"></div>
 											</div>
 											<div class="description">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
+												<p>{{ $value->description_en }}</p>
 											</div>
 										</div>
 									</div>
 								</div>
 							</li>
-							<li>
-								<div class="list_inner">
-									<span class="icon"><img class="svg" src="img/svg/physics.svg" alt=""></span>
-									<h3 class="title">Prototype</h3>
-									<p class="text">Web development is the building and maintenance of websites. it’s the work that...</p>
-									<a class="know_tm_full_link" href="#"></a>
-									<div class="hidden_content">
-										<div class="service_informations">
-											<div class="image">
-												<img src="img/thumbs/4-2.jpg" alt="">
-												<div class="main" data-img-url="img/service/2.jpg"></div>
-											</div>
-											<div class="description">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="list_inner">
-									<span class="icon"><img class="svg" src="img/svg/web.svg" alt=""></span>
-									<h3 class="title">UI Design</h3>
-									<p class="text">Web development is the building and maintenance of websites. it’s the work that...</p>
-									<a class="know_tm_full_link" href="#"></a>
-									<div class="hidden_content">
-										<div class="service_informations">
-											<div class="image">
-												<img src="img/thumbs/4-2.jpg" alt="">
-												<div class="main" data-img-url="img/service/3.jpg"></div>
-											</div>
-											<div class="description">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="list_inner">
-									<span class="icon"><img class="svg" src="img/svg/user.svg" alt=""></span>
-									<h3 class="title">Personal Creation</h3>
-									<p class="text">Web development is the building and maintenance of websites. it’s the work that...</p>
-									<a class="know_tm_full_link" href="#"></a>
-									<div class="hidden_content">
-										<div class="service_informations">
-											<div class="image">
-												<img src="img/thumbs/4-2.jpg" alt="">
-												<div class="main" data-img-url="img/service/4.jpg"></div>
-											</div>
-											<div class="description">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="list_inner">
-									<span class="icon"><img class="svg" src="img/svg/briefcase.svg" alt=""></span>
-									<h3 class="title">Case Study</h3>
-									<p class="text">Web development is the building and maintenance of websites. it’s the work that...</p>
-									<a class="know_tm_full_link" href="#"></a>
-									<div class="hidden_content">
-										<div class="service_informations">
-											<div class="image">
-												<img src="img/thumbs/4-2.jpg" alt="">
-												<div class="main" data-img-url="img/service/5.jpg"></div>
-											</div>
-											<div class="description">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="list_inner">
-									<span class="icon"><img class="svg" src="img/svg/writing_2.svg" alt=""></span>
-									<h3 class="title">Experience Design</h3>
-									<p class="text">Web development is the building and maintenance of websites. it’s the work that...</p>
-									<a class="know_tm_full_link" href="#"></a>
-									<div class="hidden_content">
-										<div class="service_informations">
-											<div class="image">
-												<img src="img/thumbs/4-2.jpg" alt="">
-												<div class="main" data-img-url="img/service/6.jpg"></div>
-											</div>
-											<div class="description">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
+                            @endforeach
 						</ul>
 					</div>
 				</div>
 			</div>
 			<!-- /SERVICES -->
-
+            @endif
+            @if($testimonial->isNotEmpty())
 			<!-- TESTIMONIALS -->
 			<div id="testimonials" class="know_tm_main_section">
 				<div class="know_tm_testimonials">
@@ -723,115 +561,34 @@
 						<h3>What people say about me</h3>
 					</div>
 					<div class="testimonials_list owl-carousel owl-theme">
+                        @foreach ($testimonial as $value)
 						<div class="list_inner">
 							<div class="in">
 								<div class="text">
-									<p>These people really know what they are doing! Great customer support availability and supperb kindness. I am very happy that I've purchased this liscense!!!</p>
+									<p>{{ Str::limit($value->message, 100, '...')  }}</p>
 								</div>
 								<div class="details">
 									<div class="left">
 										<div class="avatar">
-											<div class="main" data-img-url="img/testimonials/1.jpg"></div>
+											<div class="main" data-img-url="{{ asset('/') . $value->avatar }}"></div>
 										</div>
 										<div class="info">
-											<h3>Jecob Oramson</h3>
-											<span>Designer</span>
+											<h3>{{ $value->name }}</h3>
+											<span>{{ $value->job_title }}</span>
 										</div>
 									</div>
 									<div class="right">
-										<img class="svg" src="img/svg/left-quote.svg" alt="">
+										<img class="svg" src="{{ asset('assets/profile/img/svg/left-quote.svg') }}" alt="">
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="list_inner">
-							<div class="in">
-								<div class="text">
-									<p>The design is elegant. The customer support on this product is also amazing. I would highly recommend you to purchase templates from the Marketify team!</p>
-								</div>
-								<div class="details">
-									<div class="left">
-										<div class="avatar">
-											<div class="main" data-img-url="img/testimonials/2.jpg"></div>
-										</div>
-										<div class="info">
-											<h3>Kerry Hudson</h3>
-											<span>IBO. Corp</span>
-										</div>
-									</div>
-									<div class="right">
-										<img class="svg" src="img/svg/left-quote.svg" alt="">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="list_inner">
-							<div class="in">
-								<div class="text">
-									<p>Not only was customer support very fast, but the design is very professional. Will definitely be looking for new products in the future from this author.</p>
-								</div>
-								<div class="details">
-									<div class="left">
-										<div class="avatar">
-											<div class="main" data-img-url="img/testimonials/3.jpg"></div>
-										</div>
-										<div class="info">
-											<h3>Albert Walker</h3>
-											<span>Singer</span>
-										</div>
-									</div>
-									<div class="right">
-										<img class="svg" src="img/svg/left-quote.svg" alt="">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="list_inner">
-							<div class="in">
-								<div class="text">
-									<p>The Author had done a great job, it's clean and easy to understand the code. Comment blocks made it really easy to read the code.</p>
-								</div>
-								<div class="details">
-									<div class="left">
-										<div class="avatar">
-											<div class="main" data-img-url="img/testimonials/4.jpg"></div>
-										</div>
-										<div class="info">
-											<h3>Arnold Hookins</h3>
-											<span>Photographer</span>
-										</div>
-									</div>
-									<div class="right">
-										<img class="svg" src="img/svg/left-quote.svg" alt="">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="list_inner">
-							<div class="in">
-								<div class="text">
-									<p>I can't believe I got support and my problem resolved in minutes from posting my question. Simply amazing team and amazing theme! Thank you!</p>
-								</div>
-								<div class="details">
-									<div class="left">
-										<div class="avatar">
-											<div class="main" data-img-url="img/testimonials/5.jpg"></div>
-										</div>
-										<div class="info">
-											<h3>Aura Brooklyn</h3>
-											<span>Fashion Model</span>
-										</div>
-									</div>
-									<div class="right">
-										<img class="svg" src="img/svg/left-quote.svg" alt="">
-									</div>
-								</div>
-							</div>
-						</div>
+                        @endforeach
 					</div>
 				</div>
 			</div>
 			<!-- /TESTIMONIALS -->
+            @endif
 
 			<!-- NEWS -->
 			<div id="news" class="know_tm_main_section">
@@ -842,77 +599,28 @@
 					</div>
 					<div class="news_list">
 						<ul>
-							<li>
+						@foreach ($blog as $value)
+                            <li>
 								<div class="list_inner">
 									<div class="image">
-										<img src="img/thumbs/37-27.jpg" alt="">
-										<div class="main" data-img-url="img/news/1.jpg"></div>
+										<img src="{{ asset('assets/profile/img/thumbs/37-27.jpg')}}" alt="">
+										<div class="main" data-img-url="{{ asset('/') . $value->image }}"></div>
 										<a class="know_tm_full_link" href="#"></a>
 									</div>
-									<div class="details">
-										<span class="category"><a href="#">Web Design</a></span>
-										<h3 class="title"><a href="#">How to create a website using WordPress</a></h3>
+									<div class="details" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+										<span class="category"><a href="#">{{ $value->title_en }}</a></span>
+										<h3 class="title"><a href="#">{{ $value->question_en }}</a></h3>
 									</div>
-
 									<div class="hidden_content">
 										<div class="news_informations">
 											<div class="text">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</li>
-							<li>
-								<div class="list_inner">
-									<div class="image">
-										<img src="img/thumbs/37-27.jpg" alt="">
-										<div class="main" data-img-url="img/news/2.jpg"></div>
-										<a class="know_tm_full_link" href="#"></a>
-									</div>
-									<div class="details">
-										<span class="category"><a href="#">Branding</a></span>
-										<h3 class="title"><a href="#">Angular team streamlines requests</a></h3>
-									</div>
-
-									<div class="hidden_content">
-										<div class="news_informations">
-											<div class="text">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</li>
-							<li>
-								<div class="list_inner">
-									<div class="image">
-										<img src="img/thumbs/37-27.jpg" alt="">
-										<div class="main" data-img-url="img/news/3.jpg"></div>
-										<a class="know_tm_full_link" href="#"></a>
-									</div>
-									<div class="details">
-										<span class="category"><a href="#">UI Design</a></span>
-										<h3 class="title"><a href="#">How to handle errors in React Javascript</a></h3>
-									</div>
-
-									<div class="hidden_content">
-										<div class="news_informations">
-											<div class="text">
-												<p>Know is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.</p>
-												<p>In today’s digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user’s first impression relates to web design. It’s also why web design services can have an immense impact on your company’s bottom line.</p>
-												<p>That’s why more companies are not only reevaluating their website’s design but also partnering with Kura, the web design agency that’s driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business.</p>
+												<p>{{ $value->answer_en }}</p>
 											</div>
 										</div>
 									</div>
 								</div>
 							</li>
+                            @endforeach
 						</ul>
 					</div>
 				</div>
@@ -931,28 +639,28 @@
 							<ul>
 								<li>
 									<div class="list_inner">
-										<span class="icon"><img class="svg" src="img/svg/smartphone.svg" alt=""></span>
+										<span class="icon"><img class="svg" src="{{ asset('assets/profile/img/svg/smartphone.svg') }}" alt=""></span>
 										<div class="short">
 											<h3>Call Me</h3>
-											<span>+123 456 7890</span>
+											<span>{{ App\Models\Setting::where('key' , 'phone')->first()->value }}</span>
 										</div>
 									</div>
 								</li>
 								<li>
 									<div class="list_inner">
-										<span class="icon"><img class="svg" src="img/svg/letter.svg" alt=""></span>
+										<span class="icon"><img class="svg" src="{{ asset('assets/profile/img/svg/letter.svg') }}" alt=""></span>
 										<div class="short">
 											<h3>Email Us</h3>
-											<span><a href="#"><span class="__cf_email__" data-cfemail="365e535a5a59765f5d5859411855595b">[email&#160;protected]</span></a></span>
+											<span><a href="#"><span class="__cf_email__" data-cfemail="365e535a5a59765f5d5859411855595b">{{ App\Models\Setting::where('key' , 'email')->first()->value }}</span></a></span>
 										</div>
 									</div>
 								</li>
 								<li>
 									<div class="list_inner">
-										<span class="icon"><img class="svg" src="img/svg/placeholder.svg" alt=""></span>
+										<span class="icon"><img class="svg" src="{{ asset('assets/profile/img/svg/placeholder.svg') }}" alt=""></span>
 										<div class="short">
 											<h3>Address</h3>
-											<span>20, Bardeshi, Amin Bazar</span>
+											<span>{{ App\Models\Setting::where('key' , 'address')->first()->value }}</span>
 										</div>
 									</div>
 								</li>
@@ -961,21 +669,22 @@
 						<div class="right">
 							<div class="fields">
 								<form action="/" method="post" class="contact_form" id="contact_form" autocomplete="off">
-									<div class="returnmessage" data-success="Your message has been received, We will contact you soon."></div>
+                                    <div class="returnmessage" data-success="Your message has been received, We will contact you soon."></div>
 									<div class="empty_notice"><span>Please Fill Required Fields</span></div>
 									<div class="input_list">
 										<ul>
-											<li><input id="name" type="text" placeholder="Your Name"></li>
-											<li><input id="email" type="text" placeholder="Your Email"></li>
-											<li><input id="phone" type="number" placeholder="Your Phone"></li>
-											<li><input id="subject" type="text" placeholder="Subject"></li>
+                                            <li hidden><input name="XSRF-TOKEN" id="XSRF-TOKEN" type="text" value="{{ csrf_token() }}" placeholder="Your Name" required></li>
+											<li><input name="name" id="name" type="text" placeholder="Your Name" required></li>
+											<li><input name="email" id="email" type="text" placeholder="Your Email" required></li>
+											<li><input name="phone" id="phone" type="number" placeholder="Your Phone" required></li>
+											<li><input name="subject" id="subject" type="text" placeholder="Subject" required></li>
 										</ul>
 									</div>
 									<div class="message_area">
-										<textarea id="message" placeholder="Your message here"></textarea>
+										<textarea name="message" id="message" placeholder="Your message here" required></textarea>
 									</div>
 									<div class="know_tm_button">
-										<a id="send_message" href="#">Submit Now</a>
+                                        <a id="send_message" href="#">Submit Now</a>
 									</div>
 
 									<!-- If you want change mail address to yours, just open "modal" folder >> contact.php and go to line 4 and change detail to yours.  -->
@@ -1023,6 +732,7 @@
 <script src="{{ asset('assets/profile/js/jquery.js') }}"></script>
 <script src="{{ asset('assets/profile/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/profile/js/init.js') }}"></script>
+{{-- <script src="{{ asset('assets/profile/local/index.js') }}"></script> --}}
 <!-- /SCRIPTS -->
 
 </body>

@@ -7,9 +7,9 @@
 jQuery(document).ready(function(){
 
 	"use strict";
-	
+
 	// here all ready functions
-	
+
 	know_tm_content_height();
 	know_tm_menu_width();
 	know_tm_portfolio();
@@ -29,15 +29,15 @@ jQuery(document).ready(function(){
 		know_tm_circular_progress();
 	}
 	know_tm_extra_menu();
-	
+
 	jQuery(window).load('body', function(){
 		know_tm_my_load();
 	});
-	
+
 	jQuery(window).on('resize', function(){
 		know_tm_hero_height();
 	});
-	
+
 });
 
 // -----------------------------------------------------
@@ -49,9 +49,9 @@ jQuery(document).ready(function(){
 // -----------------------------------------------------
 
 function know_tm_hero_height(){
-	
+
 	"use strict";
-	
+
 	var H 		= $('.know_tm_hero .main_menu').outerHeight();
 	var WW		= jQuery(window).width();
 	var topbarH = $('.know_tm_topbar').height();
@@ -65,9 +65,9 @@ function know_tm_hero_height(){
 // -------------------------------------------------
 
 function know_tm_content_height(){
-	
+
 	"use strict";
-	
+
 	var ww				= jQuery(window).width();
 	var wh				= jQuery(window).height();
 	var topbarH			= jQuery('.know_tm_topbar').outerHeight();
@@ -78,7 +78,7 @@ function know_tm_content_height(){
 	var total			= wh-topbarH-footerH-62;
 	var total2			= wh-topbarH-footerH-40;
 	var total3			= wh-topbarH-footerH;
-	
+
 	if(ww > 1400){
 		jQuery('.know_tm_fixed_content .fixed_content_inner').css({height:total+'px',top:topPosition+'px'});
 	}
@@ -103,12 +103,12 @@ function know_tm_portfolio(){
 		var filter		 = jQuery('.know_tm_portfolio .portfolio_filter ul');
 
 		if(filter.length){
-			// Isotope Filter 
+			// Isotope Filter
 			filter.find('a').on('click', function(){
 				var element		= jQuery(this);
 				var selector 	= element.attr('data-filter');
 				var list		= element.closest('.know_tm_portfolio').find('.portfolio_list').children('ul');
-				list.isotope({ 
+				list.isotope({
 					filter				: selector,
 					animationOptions	: {
 						duration			: 750,
@@ -116,11 +116,11 @@ function know_tm_portfolio(){
 						queue				: false
 					}
 				});
-				
+
 				filter.find('a').removeClass('current');
 				element.addClass('current');
 				return false;
-			});	
+			});
 		}
 	}
 }
@@ -130,13 +130,13 @@ function know_tm_portfolio(){
 // -------------------------------------------------
 
 function know_tm_portfolio_popup(){
-	
+
 	"use strict";
-	
+
 	var modalBox		= jQuery('.know_tm_modalbox');
 	var button			= jQuery('.know_tm_portfolio .portfolio_popup');
 	var closePopup		= modalBox.find('.close');
-	
+
 	button.off().on('click',function(){
 		var element = jQuery(this);
 		var parent 	= element.closest('.list_inner');
@@ -162,13 +162,13 @@ function know_tm_portfolio_popup(){
 // -------------------------------------------------
 
 function know_tm_service_popup(){
-	
+
 	"use strict";
-	
+
 	var modalBox		= jQuery('.know_tm_modalbox');
 	var button			= jQuery('.know_tm_services .know_tm_full_link');
 	var closePopup		= modalBox.find('.close');
-	
+
 	button.on('click',function(){
 		var element = jQuery(this);
 		var parent  = element.closest('.list_inner');
@@ -192,13 +192,13 @@ function know_tm_service_popup(){
 // -------------------------------------------------
 
 function know_tm_news_popup(){
-	
+
 	"use strict";
-	
+
 	var modalBox		= jQuery('.know_tm_modalbox');
 	var button			= jQuery('.know_tm_news .know_tm_full_link,.know_tm_news .news_list ul li .details .title a');
 	var closePopup		= modalBox.find('.close');
-	
+
 	button.on('click',function(){
 		var element  = jQuery(this);
 		var parent 	 = element.closest('.list_inner');
@@ -208,7 +208,7 @@ function know_tm_news_popup(){
 		var title	 = parent.find('.details .title a').text();
 		modalBox.addClass('opened');
 		modalBox.find('.description_wrap').html(content);
-		modalBox.find('.news_informations').prepend('<div class="image"><img src="img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+image+'"></div></div>');
+		modalBox.find('.news_informations').prepend('<div class="image"><img src="http://127.0.0.1:8000/assets/profile/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+image+'"></div></div>');
 		modalBox.find('.news_informations .image').after('<div class="details"><span>'+category+'</span><h3>'+title+'</h3><div>');
 		know_tm_data_images();
 		return false;
@@ -225,12 +225,12 @@ function know_tm_news_popup(){
 // -----------------------------------------------------
 
 function know_tm_menu_width(){
-	
+
 	"use strict";
-	
+
 	var ww	= jQuery(window).width();
 	var btn	= jQuery('.know_tm_hero .main_menu ul li a');
-	
+
 //	211->235 + 4 638 -> 654
 	btn.on('mouseenter',function(){
 		var element 	= jQuery(this);
@@ -251,7 +251,7 @@ function know_tm_menu_width(){
 		if(ww <= 1400){
 			allLi.removeClass('entered').css({width:'95px'});
 		}
-		
+
 		if(activeLi.length){
 			var elWidth		= 135;
 			if(ww <= 1400){
@@ -261,7 +261,7 @@ function know_tm_menu_width(){
 			activeLi.removeClass('fixed').addClass('active').css({width: elWidth+textWidth+'px'});
 		}
 	});
-	
+
 	btn.on('click',function(){
 		var element 	= jQuery(this);
 		var li			= element.closest('li');
@@ -271,7 +271,7 @@ function know_tm_menu_width(){
 		}
 		li.addClass('active fixed');
 		var mainMenu	= element.closest('.main_menu');
-		
+
 		if(ww <= 1040){
 			$('html, body').animate({
 				scrollTop: $('.know_tm_mainpart').offset().top - 30
@@ -281,8 +281,8 @@ function know_tm_menu_width(){
 				scrollTop: mainMenu.offset().top - 30
 			}, 1000);
 		}
-		
-		
+
+
 		li.siblings().removeClass('active').css({width:'135px'});
 		if(ww <= 1400){
 			li.siblings().removeClass('active').css({width:'95px'});
@@ -292,17 +292,17 @@ function know_tm_menu_width(){
 		jQuery('.know_tm_hero .background_shape').addClass('opened');
 		jQuery('.know_tm_copyright.hidden').addClass('visible');
 		$(href).addClass('active');
-		
+
 		if(!li.hasClass('entered')){
 			var elWidth		= li.outerWidth();
 			var textWidth	= li.find('span').outerWidth();
 			li.css({width: elWidth+textWidth+'px'});
 		}
 		know_tm_owl_carousel();
-		
+
 		return false;
 	});
-	
+
 	jQuery('.know_tm_hero .main_menu ul li.active').each(function(){
 		var element 	= jQuery(this);
 		var elWidth		= element.outerWidth();
@@ -318,9 +318,9 @@ function know_tm_menu_width(){
 // -------------------------------------------------
 
 function tdProgress(container){
-	
+
 	"use strict";
-		
+
 	container.find('.progress_inner').each(function() {
 		var progress 		= jQuery(this);
 		var pValue 			= parseInt(progress.data('value'), 10);
@@ -336,9 +336,9 @@ function tdProgress(container){
 	});
 }
 function progress_by_frenify(wrapper){
-	
+
 	"use strict";
-	
+
 	var element;
 	if(wrapper){
 		element = wrapper.find('.dodo_progress');
@@ -349,7 +349,7 @@ function progress_by_frenify(wrapper){
 		var pWrap = jQuery(this);
 		pWrap.find('.number').css({right:'100%'});
 		console.log(pWrap.find('.number').length);
-		pWrap.waypoint({handler: function(){tdProgress(pWrap);},offset:'90%'});	
+		pWrap.waypoint({handler: function(){tdProgress(pWrap);},offset:'90%'});
 	});
 }
 if(!$('.know_tm_extra_menu').length){
@@ -361,12 +361,12 @@ if(!$('.know_tm_extra_menu').length){
 // -----------------------------------------------------
 
 function know_tm_preloader(){
-	
+
 	"use strict";
-	
+
 	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 	var preloader = $('#preloader');
-	
+
 	if (!isMobile) {
 		setTimeout(function() {
 			preloader.addClass('preloaded');
@@ -385,9 +385,9 @@ function know_tm_preloader(){
 // -----------------------------------------------------
 
 function know_tm_my_load(){
-	
+
 	"use strict";
-	
+
 	var speed	= 500;
 	setTimeout(function(){know_tm_preloader();},speed);
 	setTimeout(function(){jQuery('body').addClass('opened');},speed+2000);
@@ -398,11 +398,11 @@ function know_tm_my_load(){
 // -----------------------------------------------------
 
 function know_tm_cursor(){
-	
+
     "use strict";
-	
+
 	var myCursor	= jQuery('.mouse-cursor');
-	
+
 	if(myCursor.length){
 		if ($("body")) {
         const e = document.querySelector(".cursor-inner"),
@@ -425,11 +425,11 @@ function know_tm_cursor(){
 // -----------------------------------------------------
 
 function know_tm_imgtosvg(){
-	
+
 	"use strict";
-	
+
 	jQuery('img.svg').each(function(){
-		
+
 		var jQueryimg 		= jQuery(this);
 		var imgClass		= jQueryimg.attr('class');
 		var imgURL			= jQueryimg.attr('src');
@@ -459,7 +459,7 @@ function know_tm_imgtosvg(){
 // -----------------------------------------------------
 
 function know_tm_popup(){
-	
+
 	"use strict";
 
 	jQuery('.gallery_zoom').each(function() { // the containers for all your galleries
@@ -484,11 +484,11 @@ function know_tm_popup(){
 			fixedContentPos: false
 		});
 	});
-	
+
 	jQuery('.soundcloude_link').magnificPopup({
 	  type : 'image',
 	   gallery: {
-		   enabled: true, 
+		   enabled: true,
 	   },
 	});
 }
@@ -498,11 +498,11 @@ function know_tm_popup(){
 // -----------------------------------------------------
 
 function know_tm_data_images(){
-	
+
 	"use strict";
-	
+
 	var data			= jQuery('*[data-img-url]');
-	
+
 	data.each(function(){
 		var element			= jQuery(this);
 		var url				= element.data('img-url');
@@ -515,44 +515,49 @@ function know_tm_data_images(){
 // -----------------------------------------------------
 
 function know_tm_contact_form(){
-	
+
 	"use strict";
-	
+
 	jQuery(".contact_form #send_message").on('click', function(){
-		
+
 		var name 		= jQuery(".contact_form #name").val();
 		var email 		= jQuery(".contact_form #email").val();
 		var message 	= jQuery(".contact_form #message").val();
+		var phone 	= jQuery(".contact_form #phone").val();
 		var subject 	= jQuery(".contact_form #subject").val();
 		var success     = jQuery(".contact_form .returnmessage").data('success');
-	
+
 		jQuery(".contact_form .returnmessage").empty(); //To empty previous error/success message.
-		//checking for blank fields	
-		if(name===''||email===''||message===''){
-			
+		//checking for blank fields
+		if(name===''||email===''||message==='' || phone==='' || subject===''){
+
 			jQuery('div.empty_notice').slideDown(500).delay(2000).slideUp(500);
 		}
 		else{
+            jQuery.ajaxSetup({
+                headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+             });
 			// Returns successful data submission message when the entered information is stored in database.
-			jQuery.post("modal/contact.php",{ ajax_name: name, ajax_email: email, ajax_message:message, ajax_subject: subject}, function(data) {
-				
+			jQuery.post("modal/contact.php",{name: name, email: email, message:message, subject: subject , phone: phone}, function(data) {
+
 				jQuery(".contact_form .returnmessage").append(data);//Append returned message to message paragraph
-				
-				
-				if(jQuery(".contact_form .returnmessage span.contact_error").length){
-					jQuery(".contact_form .returnmessage").slideDown(500).delay(2000).slideUp(500);		
+
+				if(jQuery(".contact_form .returnmessage span.contact_error").length || data !== ""){
+					jQuery(".contact_form .returnmessage").slideDown(500).delay(2000).slideUp(500);
 				}else{
 					jQuery(".contact_form .returnmessage").append("<span class='contact_success'>"+ success +"</span>");
 					jQuery(".contact_form .returnmessage").slideDown(500).delay(4000).slideUp(500);
 				}
-				
+
 				if(data===""){
 					jQuery("#contact_form")[0].reset();//To reset form fields on success
 				}
-				
+
 			});
 		}
-		return false; 
+		return false;
 	});
 }
 
@@ -569,20 +574,20 @@ function know_tm_contact_form(){
 function know_tm_owl_carousel(){
 
 	"use strict";
-	
+
 	var carousel			= jQuery('.know_tm_testimonials .owl-carousel');
 	var carousel2			= jQuery('.know_tm_fixed_content .know_tm_testimonials .owl-carousel');
-	
+
 	var rtlMode		= false;
 
 	if(jQuery('body').hasClass('rtl')){
 		rtlMode = 'true';
 	}
-	
+
 	carousel2.owlCarousel({
 		items: 1,
 	});
-	
+
 	carousel.owlCarousel({
 		loop: true,
 		items: 2,
@@ -608,10 +613,10 @@ function know_tm_owl_carousel(){
 
 function know_tm_circular_progress(){
 	"use strict";
-	
+
 	var ww		= jQuery(window).width();
 	var circVal;
-	
+
 	if(ww > 1400){
 		circVal = 213;
 	}
@@ -621,7 +626,7 @@ function know_tm_circular_progress(){
 	else{
 		circVal = 120;
 	}
-	
+
 	jQuery('.circular_progress_bar .myCircle').each(function(){
 		var element	= jQuery(this);
 		element.append('<h3 class="number"></h3>');
@@ -644,10 +649,10 @@ function know_tm_circular_progress(){
 
 function by_frenify(wrapper,speed){
 	"use strict";
-	
+
 	var ww		= jQuery(window).width();
 	var circVal;
-	
+
 	if(ww > 1400){
 		circVal = 213;
 	}
@@ -657,20 +662,20 @@ function by_frenify(wrapper,speed){
 	else{
 		circVal = 120;
 	}
-	
+
 	var element = wrapper.find('.myCircle');
-	
+
 	if(element.length > 0){
-		
+
 		element.each(function(){
 			var e		= jQuery(this);
 			var value	= e.data('value');
 			var speed2 	= 1400;
-			
+
 			if(!e.find('.number').length){
 				e.append('<h3 class="number"></h3>');
 			}
-			
+
 			e.circleProgress({
 				size: circVal,
 				value: 0,
@@ -682,11 +687,11 @@ function by_frenify(wrapper,speed){
 			}).on('circle-animation-progress', function(event, progress, stepValue) {
 				e.find('h3').text(parseInt(stepValue.toFixed(2)*100) + '%');
 			});
-			
+
 			setTimeout(function() { e.circleProgress('value', 1.0); }, speed);
 			setTimeout(function() { e.circleProgress('value', value); }, speed2+speed);
 		});
-		
+
 	}
 }
 
@@ -695,9 +700,9 @@ function by_frenify(wrapper,speed){
 // -----------------------------------------------------
 
 function know_tm_extra_menu(){
-	
+
 	"use strict";
-	
+
 	var item	= jQuery('.know_tm_extra_menu .unorderest_li');
 	var speed	= 1000;
 	item.each(function(){
@@ -705,43 +710,43 @@ function know_tm_extra_menu(){
 		var content			= jQuery(element.find('.know_tm_full_link').attr('href')).html();
 		element.append('<div class="details_wrapper"></div>').find('.details_wrapper').html(content);
 	});
-	
-	
+
+
 	var button  = jQuery('.know_tm_extra_menu .know_tm_full_link');
-	
+
 	button.on('click',function(){
 		var element			= jQuery(this);
 		var li				= element.closest('li');
-		
+
 		var details			= li.find('.details_wrapper');
 		var detailsH		= details.outerHeight() * 0.7;
 		var min = 500, max = 1000;
 		speed = detailsH < min ? min:detailsH;
 		speed = speed > max ? max:speed;
 		speed = parseInt(speed);
-		
+
 		if(li.hasClass('opened')){
 			li.removeClass('opened').find('.details_wrapper').slideUp(speed);return false;
 		}else{
 			li.siblings().removeClass('opened');
 			li.addClass('opened');
 		}
-		
+
 		var index			= li.index();
 		var marginBottom 	= parseInt(li.css("margin-bottom"));
 		var liHeight		= li.find('.list_in').outerHeight();
 		var parent			= li.closest('.menu_list');
 		var top				= parent.offset().top + (liHeight + marginBottom) * index;
-		
+
 		/* Scroll the window to the selected element */
 		$('html, body').animate({
 			scrollTop: top - marginBottom
 		},speed);
-		
+
 		li.siblings().find('.details_wrapper').slideUp(speed);
 		li.find('.details_wrapper').slideDown(speed);
 		by_frenify(li,speed);
-		
+
 		// reinitialization functions
 		know_tm_owl_carousel();
 		progress_by_frenify(li);
@@ -760,14 +765,14 @@ function know_tm_extra_menu(){
 // -----------------------------------------------------
 
 function know_tm_menubar(){
-	
+
 	"use strict";
-	
+
 	var li		= jQuery('.know_tm_fixed_content .menubar ul li');
 	var button	= li.find('.know_tm_full_link');
-	
+
 	button.on('click',function(){
-		var element = jQuery(this);	
+		var element = jQuery(this);
 		var parent	= element.closest('li');
 		var href	= element.attr('href');
 		if(!parent.hasClass('active')){
@@ -788,9 +793,9 @@ function know_tm_menubar(){
 // -----------------------------------------------------
 
 function know_tm_moving_effect(){
-	
+
 	"use strict";
-	
+
 	var value 	= 23;
 	var height 	= value / $(document).height();
 	var width 	= value / $(document).width();
@@ -815,14 +820,14 @@ function know_tm_moving_effect(){
 // -----------------------------------------------------
 
 function know_tm_intro_tab(){
-	
+
 	"use strict";
-	
+
 	var li		= jQuery('.know_tm_intro .filter ul li');
 	var button	= li.find('a');
-	
+
 	button.on('click',function(){
-		var element = jQuery(this);	
+		var element = jQuery(this);
 		var parent	= element.closest('li');
 		var href	= element.attr('href');
 		if(!parent.hasClass('active')){

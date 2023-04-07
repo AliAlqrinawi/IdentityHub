@@ -14,4 +14,13 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
+
+    // protected function addCookieToResponse($request, $response)
+    // {
+    //     parent::addCookieToResponse($request, $response);
+
+    //     $response->headers->set('X-CSRF-TOKEN', $request->session()->token());
+
+    //     return $response;
+    // }
 }
