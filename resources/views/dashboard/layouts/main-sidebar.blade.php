@@ -17,8 +17,8 @@
             <div class="dropdown user-pro-body">
                 <div class="">
                     <img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{ asset('/').App\Models\About::where('status' , 'ACTIVE')->first()->first_photo }}"><span
-                        class="avatar-status profile-status bg-green"></span>
+                        src="{{ asset('/').optional(App\Models\About::where('status' , 'ACTIVE')->first())->first_photo }}">
+                        <span class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
                     <h4 class="font-weight-semibold mt-3 mb-0"> {{ Auth::user()->name ?? ""}}</h4>
@@ -110,7 +110,7 @@
             </li>
 
             <li class="slide">
-                <a class="side-menu__item" href="{{ route('blog.index') }}">
+                <a class="side-menu__item" href="{{ route('contact.index') }}">
                     <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/256/1A6DFF/C822FF/email.png')}}"
                         style=" width: 30px; height: 30px;" />
                     <span class="side-menu__label" style=" font-weight: bold;">Contact</span>

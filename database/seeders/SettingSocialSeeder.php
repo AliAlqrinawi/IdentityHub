@@ -56,6 +56,30 @@ class SettingSocialSeeder extends Seeder
                 'type' => 'text',
                 'group' => 'social',
             ],
+            [
+                'key' => 'phone',
+                'value' => '1321',
+                'label_en' => 'Phone',
+                'label_ar' => 'رقم الجوال',
+                'type' => 'text',
+                'group' => 'social',
+            ],
+            [
+                'key' => 'email',
+                'value' => '1321',
+                'label_en' => 'E-mail',
+                'label_ar' => 'البريد الإلكتروني',
+                'type' => 'text',
+                'group' => 'social',
+            ],
+            [
+                'key' => 'address',
+                'value' => '1321',
+                'label_en' => 'Address',
+                'label_ar' => 'العنوان',
+                'type' => 'text',
+                'group' => 'social',
+            ],
         ];
 
 
