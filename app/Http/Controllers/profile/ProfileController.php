@@ -5,6 +5,8 @@ namespace App\Http\Controllers\profile;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Blog;
+use App\Models\Business;
+use App\Models\Category;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Service;
@@ -29,7 +31,13 @@ class ProfileController extends Controller
         $service = Service::where('status' , 'ACTIVE')->get();
         $testimonial = Testimonial::where('status' , 'ACTIVE')->get();
         $blog = Blog::where('status' , 'ACTIVE')->get();
-        return view('profile.home.index' , compact('aboutMe' , 'education' , 'experience' , 'personal_skill' , 'software_skill' , 'service' , 'testimonial' , 'blog'));
+        $category = Category::where('status' , 'ACTIVE')->get();
+        $business = Business::where('status' , 'ACTIVE')->whereHas('category' , function($q){
+            $q->where('status' , 'ACTIVE');
+        })->with('category')->get();
+        return view('profile.home.index' , compact('aboutMe' , 'education' , 'experience' ,
+        'personal_skill' , 'software_skill' , 'service' , 'testimonial' , 'blog' ,
+        'category' , 'business'));
     }
 
     /**

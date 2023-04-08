@@ -58,6 +58,11 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
+                                    <label for="exampleInputEmail1">Link :</label>
+                                    <input type="text" class="form-control" name="link" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Logo :</label>
                                     <input type="file" class="form-control" name="logo" >
                                 </div>
@@ -120,6 +125,11 @@
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Sub Title :</label>
                                     <input type="text" class="form-control" id="sub_title_en" name="sub_title_en" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="exampleInputEmail1">Link :</label>
+                                    <input type="text" class="form-control" id="link" name="link" required>
                                 </div>
 
                                 <div class="form-group col-md-6">

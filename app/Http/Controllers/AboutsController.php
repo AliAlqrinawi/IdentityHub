@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 class AboutsController extends Controller
 {
     /**
@@ -68,7 +69,7 @@ class AboutsController extends Controller
             'Nationality_en' => 'required|string|min:3|max:255',
             'job_title_en' => 'required|string|min:3|max:255',
             'job_description_en' => 'required|string|min:3|max:255',
-            'about_en' => 'required|string|min:3|max:255',
+            'about_en' => 'required|string|min:3',
             'status' => 'required|in:ACTIVE,NACTIVE',
             'cv' => 'required|mimes:pdf',
             'first_photo' => 'required|image',
@@ -76,20 +77,23 @@ class AboutsController extends Controller
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('first_photo')) {
+                $name = Str::random(12);
                 $firstPhoto = $request->file('first_photo');
-                $firstPhotoName = time() . '_' . '.' . $firstPhoto->getClientOriginalExtension();
+                $firstPhotoName = $name . time() . '_' . '.' . $firstPhoto->getClientOriginalExtension();
                 $firstPhoto->move(public_path('image'), $firstPhotoName);
                 $aboutData['first_photo'] = 'image/' . $firstPhotoName;
             }
             if ($request->hasFile('second_photo')) {
+                $name = Str::random(12);
                 $secondPhoto = $request->file('second_photo');
-                $secondPhotoName = time() . '_' . '.' . $secondPhoto->getClientOriginalExtension();
+                $secondPhotoName = $name . time() . '_' . '.' . $secondPhoto->getClientOriginalExtension();
                 $secondPhoto->move(public_path('image') , $secondPhotoName);
                 $aboutData['second_photo'] = 'image/' . $secondPhotoName;
             }
             if ($request->hasFile('cv')) {
+                $name = Str::random(12);
                 $cv = $request->file('cv');
-                $cvName = time() . '_' . '.' . $cv->getClientOriginalExtension();
+                $cvName = $name . time() . '_' . '.' . $cv->getClientOriginalExtension();
                 $cv->move(public_path('cv'), $cvName);
                 $aboutData['cv'] = 'cv/' . $cvName;
             }
@@ -152,7 +156,7 @@ class AboutsController extends Controller
             'Nationality_en' => 'required|string|min:3|max:255',
             'job_title_en' => 'required|string|min:3|max:255',
             'job_description_en' => 'required|string|min:3|max:255',
-            'about_en' => 'required|string|min:3|max:255',
+            'about_en' => 'required|string|min:3',
             'status' => 'required|in:ACTIVE,NACTIVE',
             'cv' => 'nullable|mimes:pdf',
             'first_photo' => 'nullable|image',
@@ -160,20 +164,23 @@ class AboutsController extends Controller
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('first_photo')) {
+                $name = Str::random(12);
                 $firstPhoto = $request->file('first_photo');
-                $firstPhotoName = time() . '_' . '.' . $firstPhoto->getClientOriginalExtension();
+                $firstPhotoName = $name . time() . '_' . '.' . $firstPhoto->getClientOriginalExtension();
                 $firstPhoto->move(public_path('image'), $firstPhotoName);
                 $aboutData['first_photo'] = 'image/' . $firstPhotoName;
             }
             if ($request->hasFile('second_photo')) {
+                $name = Str::random(12);
                 $secondPhoto = $request->file('second_photo');
-                $secondPhotoName = time() . '_' . '.' . $secondPhoto->getClientOriginalExtension();
+                $secondPhotoName = $name . time() . '_' . '.' . $secondPhoto->getClientOriginalExtension();
                 $secondPhoto->move(public_path('image') , $secondPhotoName);
                 $aboutData['second_photo'] = 'image/' . $secondPhotoName;
             }
             if ($request->hasFile('cv')) {
+                $name = Str::random(12);
                 $cv = $request->file('cv');
-                $cvName = time() . '_' . '.' . $cv->getClientOriginalExtension();
+                $cvName = $name . time() . '_' . '.' . $cv->getClientOriginalExtension();
                 $cv->move(public_path('cv'), $cvName);
                 $aboutData['cv'] = 'cv/' . $cvName;
             }

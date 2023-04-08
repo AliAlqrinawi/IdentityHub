@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('job_title');
             $table->string('avatar');
-            $table->string('message');
+            $table->mediumText('message');
             $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });

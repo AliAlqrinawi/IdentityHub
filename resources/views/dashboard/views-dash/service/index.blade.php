@@ -53,16 +53,6 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail1">Detail Title :</label>
-                                    <input type="text" class="form-control" name="detail_title_en" required>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail1">Detail Description :</label>
-                                    <textarea class="form-control" name="detail_description_en" rows="3" required></textarea>
-                                </div>
-
-                                <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Description :</label>
                                     <textarea class="form-control" name="description_en" rows="3" required></textarea>
                                 </div>
@@ -119,18 +109,8 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail1">Detail Title :</label>
-                                    <input type="text" class="form-control" id="detail_title_en" name="detail_title_en" required>
-                                </div>
-
-                                <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Description :</label>
                                     <textarea class="form-control" id="description_en" name="description_en" rows="3" required></textarea>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail1">Detail Description :</label>
-                                    <textarea class="form-control" id="detail_description_en" name="detail_description_en" rows="3" required></textarea>
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -208,8 +188,6 @@
                                         <th class="border-bottom-0">Logo</th>
                                         <th class="border-bottom-0">Title</th>
                                         <th class="border-bottom-0">Description</th>
-                                        <th class="border-bottom-0">Detail Title</th>
-                                        <th class="border-bottom-0">Detail Description</th>
                                         <th class="border-bottom-0">Status</th>
                                         <th class="border-bottom-0">Processes</th>
                                     </tr>

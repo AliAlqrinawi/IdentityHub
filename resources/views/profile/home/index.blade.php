@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="Name of your web site">
-<meta name="author" content="Marketify">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Know | Home</title>
+<title>{{ !empty($aboutMe) ? $aboutMe->name_en : 'Jessica Parker' }}</title>
+<link rel="icon" href="{{ !empty($aboutMe) ? asset('/') . $aboutMe->first_photo : asset('assets/profile/image/123.jpg') }}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- STYLES -->
 <link  href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -13,20 +11,14 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/profile/css/plugins.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/profile/css/dark.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/profile/css/style.css') }}">
-<!--<link rel="stylesheet" type="text/css" href="css/dark.css" />-->
-<!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js"></script> <![endif]-->
-<!-- /STYLES -->
-
 </head>
 
 <body>
-
 	<!-- PRELOADER -->
 	<div id="preloader">
 		<div class="loader_line"></div>
 	</div>
 	<!-- /PRELOADER -->
-
 <!-- WRAPPER ALL -->
 <div class="know_tm_all_wrap" data-magic-cursor="show"> <!-- If you want disable magic cursor change value to "hide" -->
 
@@ -46,19 +38,19 @@
 		<div class="container">
 			<div class="topbar_inner">
 				<div class="logo">
-					<a href="#"><img src="{{ asset('assets/profile/img/logo/dark.png') }}" alt=""></a>
+					{{-- <a href="#"><img src="{{ asset('assets/profile/img/logo/dark.png') }}" alt=""></a> --}}
 				</div>
 				<div class="right">
 					<div class="social">
 						<ul>
-							<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/facebook.svg') }}" alt=""></a></li>
-							<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/twitter.svg') }}" alt=""></a></li>
-							<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/youtube.svg') }}" alt=""></a></li>
-							<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/instagram.svg') }}" alt=""></a></li>
+							<li><a href="{{ App\Models\Setting::where('key' , 'facebook')->first()->value }}" target="_blank"><img class="svg" src="{{ asset('assets/profile/img/svg/social/facebook.svg') }}" alt=""></a></li>
+							<li><a href="{{ App\Models\Setting::where('key' , 'twitter')->first()->value }}" target="_blank"><img class="svg" src="{{ asset('assets/profile/img/svg/social/twitter.svg') }}" alt=""></a></li>
+							<li><a href="{{ App\Models\Setting::where('key' , 'github')->first()->value }}" target="_blank"><img class="svg" src="{{ asset('assets/profile/img/svg/social/youtube.svg') }}" alt=""></a></li>
+							<li><a href="{{ App\Models\Setting::where('key' , 'instagram')->first()->value }}" target="_blank"><img class="svg" src="{{ asset('assets/profile/img/svg/social/instagram.svg') }}" alt=""></a></li>
 						</ul>
 					</div>
 					<div class="know_tm_button">
-						<a href="{{ asset('/') .  $aboutMe->cv }}" download="">Download CV</a>
+						<a href="{{ !empty($aboutMe) ? asset('/') . $aboutMe->cv : '#' }}" download="">Download CV</a>
 					</div>
 				</div>
 			</div>
@@ -75,20 +67,20 @@
 					<div class="main_info">
 						<div class="left">
 							<span class="subtitle">I'm</span>
-							<h3 class="name">{{ $aboutMe->name_en }}</h3>
-							<p class="text">{{ $aboutMe->job_description_en }}</p>
+							<h3 class="name">{{ !empty($aboutMe) ? $aboutMe->name_en : 'Jessica Parker' }}</h3>
+							<p class="text">{{ !empty($aboutMe) ? $aboutMe->job_description_en : 'A passionate UI/UX Designer and Web Developer based In NYC, USA' }}</p>
 							<div class="know_tm_video">
 								<div class="video_inner">
 									<div class="circle"></div>
 									<h3 class="play">Play Video</h3>
-									<a class="know_tm_full_link popup-youtube" href="https://www.youtube.com/watch?v=7e90gBu4pas"></a>
+									<a class="know_tm_full_link popup-youtube" href="{{ App\Models\Setting::where('key' , 'youTube')->first()->value }}"></a>
 								</div>
 							</div>
 						</div>
 						<div class="right">
 							<div class="image">
 								<img src="{{ asset('assets/profile/img/thumbs/47-60.jpg') }}" alt="">
-								<div class="main" data-img-url="{{ asset('/') .  $aboutMe->first_photo }}"></div>
+								<div class="main" data-img-url="{{ !empty($aboutMe) ? asset('/') . $aboutMe->first_photo : asset('assets/profile/image/123.jpg') }}"></div>
 							</div>
 						</div>
 					</div>
@@ -172,33 +164,33 @@
 						<div class="left_inner">
 							<div class="image">
 								<img src="{{ asset('assets/profile/img/thumbs/35-44.jpg') }}" alt="">
-								<div class="main" data-img-url="{{ asset('/') .  $aboutMe->second_photo }}"></div>
+								<div class="main" data-img-url="{{ !empty($aboutMe) ? asset('/') . $aboutMe->second_photo : asset('assets/profile/image/1234.jpg') }}"></div>
 							</div>
 							<div class="details">
 								<ul>
 									<li>
 										<h3>Name</h3>
-										<span>{{ $aboutMe->name_en }}</span>
+										<span>{{ !empty($aboutMe) ? $aboutMe->name_en : 'Jessica Parker' }}</span>
 									</li>
 									<li>
 										<h3>Birthday</h3>
-										<span>{{    \Carbon\Carbon::parse($aboutMe->Birthday)->format('F d, Y')  }}</span>
+										<span>{{ !empty($aboutMe) ? \Carbon\Carbon::parse($aboutMe->Birthday)->format('F d, Y') : 'April 22, 1990' }}</span>
 									</li>
 									<li>
 										<h3>Mail</h3>
-										<span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b535e5757547b5a555f5e4948545515585456">{{ $aboutMe->Mail }}</a></span>
+										<span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b535e5757547b5a555f5e4948545515585456">{{ !empty($aboutMe) ? $aboutMe->Mail : 'hello@anderson.com' }}</a></span>
 									</li>
 									<li>
 										<h3>Phone</h3>
-										<span>{{ $aboutMe->Phone }}</span>
+										<span>{{ !empty($aboutMe) ? $aboutMe->Phone : '+123 456 7890' }}</span>
 									</li>
 									<li>
 										<h3>Address</h3>
-										<span>{{ $aboutMe->Address_en }}</span>
+										<span>{{ !empty($aboutMe) ? $aboutMe->Address_en : '20, Bardeshi, Dhaka' }}</span>
 									</li>
 									<li>
 										<h3>Nationality</h3>
-										<span>{{ $aboutMe->Nationality_en }}</span>
+										<span>{{ !empty($aboutMe) ? $aboutMe->Nationality_en : 'Bangladeshi' }}</span>
 									</li>
 								</ul>
 							</div>
@@ -207,16 +199,16 @@
 					<div class="right">
 						<div class="know_tm_main_title">
 							<span>About Me</span>
-							<h3>{{ $aboutMe->job_title_en }}</h3>
+							<h3>{{ !empty($aboutMe) ? $aboutMe->job_title_en : 'World leading UI/UX designer' }}</h3>
 						</div>
 						<div class="bigger_text">
-							<p>{{ $aboutMe->job_description_en }}</p>
+							<p>{{ !empty($aboutMe) ? $aboutMe->job_description_en : 'A passionate UI/UX Designer and Web Developer based In NYC, USA' }}</p>
 						</div>
 						<div class="text">
-							<p>{{ $aboutMe->about_en }}</p>
+							<p>{{ !empty($aboutMe) ? $aboutMe->about_en : 'Hi! My name is Jessica Parker. I am UI/UX designer, and I\'m very passionate and dedicated to my work. With 20 years experience as a professional graphic designer, I have acquired the skills and knowledge necessary to make your project a success.' }}</p>
 						</div>
 						<div class="know_tm_button">
-							<a href="{{ asset('/') .  $aboutMe->cv }}" download="">Download CV</a>
+							<a href="{{ !empty($aboutMe) ? asset('/') . $aboutMe->cv : '#' }}" download="">Download CV</a>
 						</div>
 					</div>
 				</div>
@@ -320,7 +312,7 @@
                                             @foreach ($software_skill as $value)
 											<li>
 												<div class="list_inner">
-													<div class="myCircle" data-value="{{ $value->percentage }}"></div>
+													<div class="myCircle" data-value="0.{{ $value->percentage }}"></div>
 													<div class="title"><h3>{{ $value->title_en }}</h3></div>
 												</div>
 											</li>
@@ -340,182 +332,42 @@
 			<div id="portfolio" class="know_tm_main_section">
 				<div class="know_tm_portfolio">
 					<div class="know_tm_main_title">
-						<span>Resume</span>
+						<span>Portfolio</span>
 						<h3>My works that I did for clients</h3>
 					</div>
 					<div class="portfolio_filter">
 						<ul>
 							<li><a href="#" class="current" data-filter="*">All</a></li>
-							<li><a href="#" data-filter=".vimeo">Vimeo</a></li>
-							<li><a href="#" data-filter=".youtube">Youtube</a></li>
-							<li><a href="#" data-filter=".soundcloud">Soundcloud</a></li>
-							<li><a href="#" data-filter=".detail">Detail</a></li>
+                            @foreach ($category as $value)
+							<li><a href="#" data-filter=".{{ $value->title_en }}">{{ $value->title_en }}</a></li>
+                            @endforeach
 						</ul>
 					</div>
 					<div class="portfolio_list">
 						<ul class="gallery_zoom">
-							<li class="vimeo">
+                            @foreach ($business as $value)
+                            <li class="{{ $value->category->title_en }}">
 								<div class="list_inner">
 									<div class="image">
 										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
-										<div class="main" data-img-url="{{ asset('img/portfolio/1.jpg') }}"></div>
+										<div class="main" data-img-url="{{ asset('/') . $value->image }}"></div>
 									</div>
 									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('assets/profile/img/svg/social/vimeo.svg') }}" alt="">
+									<img class="svg" src="{{ asset('/') . $value->logo }}" alt="">
 									<div class="details">
-										<span>Vimeo</span>
-										<h3>Aumeo Audio</h3>
+										<span>{{ $value->title_en }}</span>
+										<h3>{{ $value->sub_title_en }}</h3>
 									</div>
-									<a class="know_tm_full_link popup-vimeo" href="../../337293658.html"></a>
+									<a class="know_tm_full_link popup-vimeo" href="{{ $value->link }}"></a>
 								</div>
 							</li>
-							<li class="youtube">
-								<div class="list_inner">
-									<div class="image">
-										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
-										<div class="main" data-img-url="{{ asset('img/portfolio/2.jpg') }}"></div>
-									</div>
-									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('assets/profile/img/svg/social/youtube-2.svg') }}" alt="">
-									<div class="details">
-										<span>Youtube</span>
-										<h3>Bicker &amp; Jenna</h3>
-									</div>
-									<a class="know_tm_full_link popup-youtube" href="../../watch.html?v=7e90gBu4pas"></a>
-								</div>
-							</li>
-							<li class="soundcloud">
-								<div class="list_inner">
-									<div class="image">
-										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
-										<div class="main" data-img-url="{{ asset('img/portfolio/3.jpg') }}"></div>
-									</div>
-									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('assets/profile/img/svg/social/soundcloud.svg') }}" alt="">
-									<div class="details">
-										<span>Soundcloud</span>
-										<h3>Botanical Escape</h3>
-									</div>
-									<a class="know_tm_full_link soundcloude_link mfp-iframe audio" href="../../player/index.htm?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></a>
-								</div>
-							</li>
-
-							<li class="youtube">
-								<div class="list_inner">
-									<div class="image">
-										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
-										<div class="main" data-img-url="{{ asset('img/portfolio/6.jpg') }}"></div>
-									</div>
-									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('assets/profile/img/svg/social/youtube-2.svg') }}" alt="">
-									<div class="details">
-										<span>Youtube</span>
-										<h3>Model Car</h3>
-									</div>
-									<a class="know_tm_full_link popup-youtube" href="../../watch-1.html?v=l-epKcOA7RQ"></a>
-								</div>
-							</li>
-							<li class="vimeo">
-								<div class="list_inner">
-									<div class="image">
-										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
-										<div class="main" data-img-url="{{ asset('img/portfolio/7.jpg') }}"></div>
-									</div>
-									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('assets/profile/img/svg/social/vimeo.svg') }}" alt="">
-									<div class="details">
-										<span>Vimeo</span>
-										<h3>Smart Watch</h3>
-									</div>
-									<a class="know_tm_full_link popup-vimeo" href="../../337292310.html"></a>
-								</div>
-							</li>
-							<li class="detail">
-								<div class="list_inner">
-									<div class="image">
-										<img src="{{ asset('assets/profile/img/thumbs/1-1.jpg') }}" alt="">
-										<div class="main" data-img-url="img/portfolio/8.jpg"></div>
-									</div>
-									<div class="overlay"></div>
-									<img class="svg" src="{{ asset('assets/profile/img/svg/text.svg') }}" alt="">
-									<div class="details">
-										<span>Detail</span>
-										<h3>Teresa Melbig</h3>
-									</div>
-									<a class="know_tm_full_link portfolio_popup" href="#"></a>
-
-									<div class="hidden_content">
-										<div class="popup_details">
-											<div class="main_details">
-												<div class="textbox">
-													<p>We live in a world where we need to move quickly and iterate on our ideas as flexibly as possible. Building mockups strikes the ideal balance ease of modification.</p>
-													<p>Mockups are useful both for the creative phase of the project - for instance when you're trying to figure out your user flows or the proper visual hierarchy - and the production phase when they will represent the target product.</p>
-												</div>
-												<div class="detailbox">
-													<ul>
-														<li>
-															<span class="first">Client</span>
-															<span>Alvaro Morata</span>
-														</li>
-														<li>
-															<span class="first">Category</span>
-															<span><a href="#">Detail</a></span>
-														</li>
-														<li>
-															<span class="first">Date</span>
-															<span>March 07, 2021</span>
-														</li>
-														<li>
-															<span class="first">Share</span>
-															<ul class="share">
-																<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/facebook.svg') }}" alt=""></a></li>
-																<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/twitter.svg') }}" alt=""></a></li>
-																<li><a href="#"><img class="svg" src="{{ asset('assets/profile/img/svg/social/instagram.svg') }}" alt=""></a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<div class="additional_images">
-												<ul>
-													<li>
-														<div class="list_inner">
-															<div class="my_image">
-																<img src="{{ asset('assets/profile/img/thumbs/4-2.jpg') }}" alt="">
-																<div class="main" data-img-url="{{ asset('assets/profile/img/portfolio/1.jpg') }}"></div>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="list_inner">
-															<div class="my_image">
-																<img src="{{ asset('assets/profile/img/thumbs/4-2.jpg') }}" alt="">
-																<div class="main" data-img-url="{{ asset('img/portfolio/2.jpg') }}"></div>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="list_inner">
-															<div class="my_image">
-																<img src="{{ asset('assets/profile/img/thumbs/4-2.jpg') }}" alt="">
-																<div class="main" data-img-url="{{ asset('img/portfolio/3.jpg') }}"></div>
-															</div>
-														</div>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-
+                            @endforeach
 						</ul>
 					</div>
 				</div>
 			</div>
 			<!-- /PORTFOLIO -->
-            @if($service->isNotEmpty())
+
 			<!-- SERVICES -->
 			<div id="service" class="know_tm_main_section">
 				<div class="know_tm_services">
@@ -523,6 +375,7 @@
 						<span>Service</span>
 						<h3>Never compromise with quality</h3>
 					</div>
+                    @if($service->isNotEmpty())
 					<div class="service_list">
 						<ul>
                             @foreach ($service as $value)
@@ -530,7 +383,7 @@
 								<div class="list_inner">
 									<span class="icon"><img class="svg" src="{{ asset('/') . $value->logo }}" alt=""></span>
 									<h3 class="title">{{ $value->title_en }}</h3>
-									<p class="text">{{ Str::limit($value->description_en, 20, '...')  }}</p>
+									<p class="text">{{ Str::limit($value->description_en, 30, ' ...')  }}</p>
 									<a class="know_tm_full_link" href="#"></a>
 									<div class="hidden_content">
 										<div class="service_informations">
@@ -548,11 +401,11 @@
                             @endforeach
 						</ul>
 					</div>
+                    @endif
 				</div>
 			</div>
 			<!-- /SERVICES -->
-            @endif
-            @if($testimonial->isNotEmpty())
+
 			<!-- TESTIMONIALS -->
 			<div id="testimonials" class="know_tm_main_section">
 				<div class="know_tm_testimonials">
@@ -560,6 +413,7 @@
 						<span>Testimonials</span>
 						<h3>What people say about me</h3>
 					</div>
+                    @if($testimonial->isNotEmpty())
 					<div class="testimonials_list owl-carousel owl-theme">
                         @foreach ($testimonial as $value)
 						<div class="list_inner">
@@ -585,10 +439,10 @@
 						</div>
                         @endforeach
 					</div>
-				</div>
+                    @endif
+                </div>
 			</div>
 			<!-- /TESTIMONIALS -->
-            @endif
 
 			<!-- NEWS -->
 			<div id="news" class="know_tm_main_section">
@@ -642,7 +496,7 @@
 										<span class="icon"><img class="svg" src="{{ asset('assets/profile/img/svg/smartphone.svg') }}" alt=""></span>
 										<div class="short">
 											<h3>Call Me</h3>
-											<span>{{ App\Models\Setting::where('key' , 'phone')->first()->value }}</span>
+											<span>{{ App\Models\Setting::where('key' , 'whatsapp')->first()->value }}</span>
 										</div>
 									</div>
 								</li>
@@ -727,12 +581,10 @@
 
 </div>
 <!-- / WRAPPER ALL -->
-
 <!-- SCRIPTS -->
 <script src="{{ asset('assets/profile/js/jquery.js') }}"></script>
 <script src="{{ asset('assets/profile/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/profile/js/init.js') }}"></script>
-{{-- <script src="{{ asset('assets/profile/local/index.js') }}"></script> --}}
 <!-- /SCRIPTS -->
 
 </body>

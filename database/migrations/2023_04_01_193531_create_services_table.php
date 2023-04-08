@@ -18,13 +18,9 @@ return new class extends Migration
             $table->string('logo');
             $table->string('title_en');
             $table->string('title_ar')->nullable();
-            $table->string('description_en');
-            $table->string('description_ar')->nullable();
+            $table->text('description_en');
+            $table->text('description_ar')->nullable();
             $table->string('detail_image');
-            $table->string('detail_title_en');
-            $table->string('detail_title_ar')->nullable();
-            $table->string('detail_description_en');
-            $table->string('detail_description_ar')->nullable();
             $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });

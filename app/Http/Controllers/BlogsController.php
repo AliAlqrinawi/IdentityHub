@@ -24,11 +24,11 @@ class BlogsController extends Controller
                     return $image;
                 })
                 ->addColumn('question', function ($row) {
-                    $question = Str::limit($row->question_en, 10 , ' ...');;
+                    $question = Str::limit($row->question_en, 10 , ' ...?');;
                     return $question;
                 })
                 ->addColumn('answer', function ($row) {
-                    $answer = Str::limit($row->answer_en, 10 , ' ...?');;
+                    $answer = Str::limit($row->answer_en, 10 , ' ...');;
                     return $answer;
                 })
                 ->addColumn('status', function ($row) {
@@ -65,15 +65,16 @@ class BlogsController extends Controller
         $blogData = $request->all();
         $validator = Validator($blogData, [
             'title_en' => 'required|string|min:3|max:255',
-            'answer_en' => 'required|string|min:3|max:255',
             'question_en' => 'required|string|min:3|max:255',
+            'answer_en' => 'required|string|min:3',
             'image' => 'required|image',
             'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('image')) {
+                $name = Str::random(12);
                 $image = $request->file('image');
-                $imageName = time() . '_' . '.' . $image->getClientOriginalExtension();
+                $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('image'), $imageName);
                 $blogData['image'] = 'image/' . $imageName;
             }
@@ -129,15 +130,16 @@ class BlogsController extends Controller
         $blogData = $request->all();
         $validator = Validator($blogData, [
             'title_en' => 'required|string|min:3|max:255',
-            'answer_en' => 'required|string|min:3|max:255',
             'question_en' => 'required|string|min:3|max:255',
+            'answer_en' => 'required|string|min:3',
             'image' => 'nullable|image',
             'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('image')) {
+                $name = Str::random(12);
                 $image = $request->file('image');
-                $imageName = time() . '_' . '.' . $image->getClientOriginalExtension();
+                $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('image'), $imageName);
                 $blogData['image'] = 'image/' . $imageName;
             }
