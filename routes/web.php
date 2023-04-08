@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutsController;
+use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\BusinessesController;
 use App\Http\Controllers\CategoriesController;
@@ -29,11 +30,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProfileController::class, 'index']);
 
-Auth::routes();
+// Auth Routes
+Route::group(
+    [
+        'prefix' => 'adminAuth',
+    ], function () {
+    Auth::routes();
+});
 
-
+// Dashboard Routes
 Route::group(
     [
         'prefix' => 'admin',
@@ -60,14 +66,14 @@ Route::resource('blog', BlogsController::class)->except(['create' , 'show']);
 Route::put('status/blog/{id}', [BlogsController::class , 'status']);
 Route::resource('contact', ContactsController::class)->only(['index' , 'destroy']);
 Route::resource('setting', SettingsController::class)->only(['index' , 'update']);
+Route::get('edit', [AdminsController::class, 'edit_admin'])->name('admin.edit');
+Route::post('update', [AdminsController::class, 'update_admin'])->name('admin.updat');
+Route::get('resetPassword', [AdminsController::class, 'reset_Password']);
+Route::post('reset-Password', [AdminsController::class, 'resetPassword'])->name('admin.resetPassword');
 });
 
-Route::group(
-    [
-        'prefix' => 'user',
-    ], function () {
-        Route::get('/contact', [ContactMeController::class, 'store'])->name('contact.store');
-});
+// Web Routes
+Route::get('/', [ProfileController::class, 'index']);
+Route::post('modal/contact.php', [ContactMeController::class, 'store'])->name('contact.store');
 
-Route::post('modal/contact.php', [ContactMeController::class, 'store'])->name('contact.store')
-;
+

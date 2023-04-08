@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 
 class ServicesController extends Controller
 {
@@ -31,10 +32,6 @@ class ServicesController extends Controller
                     $description = '<textarea class="form-control" disabled="" style="width:180px; display:inline;">'.$row->description_en.'</textarea>';
                     return $description;
                 })
-                ->addColumn('detail_description', function ($row) {
-                    $detail_description = '<textarea class="form-control" disabled="" style="width:180px; display:inline;">'.$row->detail_description.'</textarea>';
-                    return $detail_description;
-                })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 'ACTIVE') {
                         $status = '<button class="modal-effect btn btn-sm btn-success" style="margin: 5px" id="status" data-id="' . $row->id . '" ><i class=" icon-check"></i></button>';
@@ -52,7 +49,6 @@ class ServicesController extends Controller
                     'logo' => 'logo',
                     'detail_image' => 'detail_image',
                     'description' => 'description',
-                    'detail_description' => 'detail_description',
                     'status' => 'status',
                     'action' => 'action',
                 ])
@@ -72,23 +68,23 @@ class ServicesController extends Controller
         $serviceData = $request->all();
         $validator = Validator($serviceData, [
             'title_en' => 'required|string|min:3|max:255',
-            'description_en' => 'required|string|min:3|max:255',
-            'detail_title_en' => 'required|string|min:3|max:255',
-            'detail_description_en' => 'required|string|min:3|max:255',
+            'description_en' => 'required|string|min:3',
             'logo' => 'required|image',
             'detail_image' => 'required|image',
             'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('logo')) {
+                $name = Str::random(12);
                 $logo = $request->file('logo');
-                $logoName = time() . '_' . '.' . $logo->getClientOriginalExtension();
+                $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
                 $logo->move(public_path('image'), $logoName);
                 $serviceData['logo'] = 'image/' . $logoName;
             }
             if ($request->hasFile('detail_image')) {
+                $name = Str::random(12);
                 $image = $request->file('detail_image');
-                $imageName = time() . '_' . '.' . $image->getClientOriginalExtension();
+                $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('image') , $imageName);
                 $serviceData['detail_image'] = 'image/' . $imageName;
             }
@@ -144,23 +140,23 @@ class ServicesController extends Controller
         $serviceData = $request->all();
         $validator = Validator($serviceData, [
             'title_en' => 'required|string|min:3|max:255',
-            'description_en' => 'required|string|min:3|max:255',
-            'detail_title_en' => 'required|string|min:3|max:255',
-            'detail_description_en' => 'required|string|min:3|max:255',
+            'description_en' => 'required|string|min:3',
             'logo' => 'nullable|image',
             'detail_image' => 'nullable|image',
             'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('logo')) {
+                $name = Str::random(12);
                 $logo = $request->file('logo');
-                $logoName = time() . '_' . '.' . $logo->getClientOriginalExtension();
+                $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
                 $logo->move(public_path('image'), $logoName);
                 $serviceData['logo'] = 'image/' . $logoName;
             }
             if ($request->hasFile('detail_image')) {
+                $name = Str::random(12);
                 $image = $request->file('detail_image');
-                $imageName = time() . '_' . '.' . $image->getClientOriginalExtension();
+                $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('image') , $imageName);
                 $serviceData['detail_image'] = 'image/' . $imageName;
             }

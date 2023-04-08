@@ -72,6 +72,7 @@ $(document).on('click', '#showModalEditBusiness', function (e) {
             } else {
                 $('#id').val(id);
                 $('#title_en').val(response.data.title_en);
+                $('#link').val(response.data.link);
                 $('#sub_title_en').val(response.data.sub_title_en);
                 $("#category_id option[value='"+response.data.category_id+"']").prop("selected", true);
                 $("#status option[value='"+response.data.status+"']").prop("selected", true);

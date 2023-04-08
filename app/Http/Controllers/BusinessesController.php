@@ -6,7 +6,7 @@ use App\Models\Business;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
+use Illuminate\Support\Str;
 class BusinessesController extends Controller
 {
     /**
@@ -67,6 +67,7 @@ class BusinessesController extends Controller
         $businessData = $request->all();
         $validator = Validator($businessData, [
             'title_en' => 'required|string|min:3|max:255',
+            'link' => 'required|string|min:3|max:255',
             'sub_title_en' => 'required|string|min:3|max:255',
             'category_id' => 'required|exists:categories,id',
             'logo' => 'required|image',
@@ -75,16 +76,18 @@ class BusinessesController extends Controller
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('logo')) {
+                $name = Str::random(12);
                 $logo = $request->file('logo');
-                $logoName = time() . '_' . '.' . $logo->getClientOriginalExtension();
+                $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
                 $logo->move(public_path('image'), $logoName);
                 $businessData['logo'] = 'image/' . $logoName;
             }
-            if ($request->hasFile('second_photo')) {
-                $image = $request->file('second_photo');
-                $imageName = time() . '_' . '.' . $image->getClientOriginalExtension();
+            if ($request->hasFile('image')) {
+                $name = Str::random(12);
+                $image = $request->file('image');
+                $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('image') , $imageName);
-                $businessData['second_photo'] = 'image/' . $imageName;
+                $businessData['image'] = 'image/' . $imageName;
             }
             $business = Business::create($businessData);
                 $response = [
@@ -138,6 +141,7 @@ class BusinessesController extends Controller
         $businessData = $request->all();
         $validator = Validator($businessData, [
             'title_en' => 'required|string|min:3|max:255',
+            'link' => 'required|string|min:3|max:255',
             'sub_title_en' => 'required|string|min:3|max:255',
             'category_id' => 'required|exists:categories,id',
             'logo' => 'nullable|image',
@@ -146,16 +150,18 @@ class BusinessesController extends Controller
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('logo')) {
+                $name = Str::random(12);
                 $logo = $request->file('logo');
-                $logoName = time() . '_' . '.' . $logo->getClientOriginalExtension();
+                $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
                 $logo->move(public_path('image'), $logoName);
                 $businessData['logo'] = 'image/' . $logoName;
             }
-            if ($request->hasFile('second_photo')) {
-                $image = $request->file('second_photo');
-                $imageName = time() . '_' . '.' . $image->getClientOriginalExtension();
+            if ($request->hasFile('image')) {
+                $name = Str::random(12);
+                $image = $request->file('image');
+                $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('image') , $imageName);
-                $businessData['second_photo'] = 'image/' . $imageName;
+                $businessData['image'] = 'image/' . $imageName;
             }
             $business = Business::find($id)->update($businessData);
                 $response = [

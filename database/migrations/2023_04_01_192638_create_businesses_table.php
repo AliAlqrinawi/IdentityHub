@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title_ar')->nullable();
             $table->string('sub_title_en');
             $table->string('sub_title_ar')->nullable();
+            $table->string('link');
             $table->foreignId('category_id');
             $table->foreign('category_id')->on('categories')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('image');

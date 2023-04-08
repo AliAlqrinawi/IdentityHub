@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 
 class TestimonialsController extends Controller
 {
@@ -62,15 +63,16 @@ class TestimonialsController extends Controller
         $testimonialData = $request->all();
         $validator = Validator($testimonialData, [
             'name' => 'required|string|min:3|max:255',
-            'job_title' => 'required|string|min:3|max:255',
+            'job_title' => 'required|string|min:3',
             'message' => 'required|string|min:3|max:255',
             'avatar' => 'required|image',
             'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('avatar')) {
+                $name = Str::random(12);
                 $avatar = $request->file('avatar');
-                $avatarName = time() . '_' . '.' . $avatar->getClientOriginalExtension();
+                $avatarName = $name . time() . '_' . '.' . $avatar->getClientOriginalExtension();
                 $avatar->move(public_path('image'), $avatarName);
                 $testimonialData['avatar'] = 'image/' . $avatarName;
             }
@@ -126,15 +128,16 @@ class TestimonialsController extends Controller
         $testimonialData = $request->all();
         $validator = Validator($testimonialData, [
             'name' => 'required|string|min:3|max:255',
-            'job_title' => 'required|string|min:3|max:255',
+            'job_title' => 'required|string|min:3',
             'message' => 'required|string|min:3|max:255',
             'avatar' => 'nullable|image',
             'status' => 'required|in:ACTIVE,NACTIVE',
         ]);
         if (!$validator->fails()) {
             if ($request->hasFile('avatar')) {
+                $name = Str::random(12);
                 $avatar = $request->file('avatar');
-                $avatarName = time() . '_' . '.' . $avatar->getClientOriginalExtension();
+                $avatarName = $name . time() . '_' . '.' . $avatar->getClientOriginalExtension();
                 $avatar->move(public_path('image'), $avatarName);
                 $testimonialData['avatar'] = 'image/' . $avatarName;
             }

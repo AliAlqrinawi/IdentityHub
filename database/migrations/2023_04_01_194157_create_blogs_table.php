@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('title_ar')->nullable();
             $table->string('question_en');
             $table->string('question_ar')->nullable();
-            $table->string('answer_en');
-            $table->string('answer_ar')->nullable();
+            $table->text('answer_en');
+            $table->text('answer_ar')->nullable();
             $table->enum('status' , ['ACTIVE' , 'NACTIVE']);
             $table->timestamps();
         });

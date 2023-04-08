@@ -45,15 +45,15 @@
                             </div>
                         </div>
                         <a class="dropdown-item" href="{{ url('admin/resetPassword') }}"><i
-                                class="bx bx-user-circle"></i>{{trans('main_trans.ch')}}</a>
+                                class="bx bx-user-circle"></i>Reset Password</a>
                         <a class="dropdown-item" href="{{url('admin/edit/')}}"><i
-                                class="bx bx-cog"></i> {{trans('main_trans.Edit_Profile')}}</a>
+                                class="bx bx-cog"></i>Edit Profile</a>
                         <!-- <a class="dropdown-item" href="{{url('/')}}"><i class="bx bxs-inbox"></i>Inbox</a> -->
                         <!-- <a class="dropdown-item" href="{{url('admin/contact')}}"><i
                                 class="bx bx-envelope"></i>{{trans('main_trans.Messages')}}</a> -->
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            <i class="bx bx-log-out"></i>{{trans('main_trans.Sign_Out')}}
+                            <i class="bx bx-log-out"></i>Sign Out
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
