@@ -73,7 +73,7 @@ class TestimonialsController extends Controller
                 $name = Str::random(12);
                 $avatar = $request->file('avatar');
                 $avatarName = $name . time() . '_' . '.' . $avatar->getClientOriginalExtension();
-                $avatar->move(public_path('image'), $avatarName);
+                $avatar->move('image', $avatarName);
                 $testimonialData['avatar'] = 'image/' . $avatarName;
             }
             $testimonial = Testimonial::create($testimonialData);
@@ -138,7 +138,7 @@ class TestimonialsController extends Controller
                 $name = Str::random(12);
                 $avatar = $request->file('avatar');
                 $avatarName = $name . time() . '_' . '.' . $avatar->getClientOriginalExtension();
-                $avatar->move(public_path('image'), $avatarName);
+                $avatar->move('image', $avatarName);
                 $testimonialData['avatar'] = 'image/' . $avatarName;
             }
             $testimonial = Testimonial::find($id)->update($testimonialData);

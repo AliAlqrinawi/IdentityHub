@@ -75,7 +75,7 @@ class BlogsController extends Controller
                 $name = Str::random(12);
                 $image = $request->file('image');
                 $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('image'), $imageName);
+                $image->move('image', $imageName);
                 $blogData['image'] = 'image/' . $imageName;
             }
             $blog = Blog::create($blogData);
@@ -140,7 +140,7 @@ class BlogsController extends Controller
                 $name = Str::random(12);
                 $image = $request->file('image');
                 $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('image'), $imageName);
+                $image->move('image', $imageName);
                 $blogData['image'] = 'image/' . $imageName;
             }
             $blog = Blog::find($id)->update($blogData);

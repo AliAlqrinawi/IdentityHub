@@ -79,14 +79,14 @@ class BusinessesController extends Controller
                 $name = Str::random(12);
                 $logo = $request->file('logo');
                 $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
-                $logo->move(public_path('image'), $logoName);
+                $logo->move('image', $logoName);
                 $businessData['logo'] = 'image/' . $logoName;
             }
             if ($request->hasFile('image')) {
                 $name = Str::random(12);
                 $image = $request->file('image');
                 $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('image') , $imageName);
+                $image->move('image' , $imageName);
                 $businessData['image'] = 'image/' . $imageName;
             }
             $business = Business::create($businessData);
@@ -153,14 +153,14 @@ class BusinessesController extends Controller
                 $name = Str::random(12);
                 $logo = $request->file('logo');
                 $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
-                $logo->move(public_path('image'), $logoName);
+                $logo->move('image', $logoName);
                 $businessData['logo'] = 'image/' . $logoName;
             }
             if ($request->hasFile('image')) {
                 $name = Str::random(12);
                 $image = $request->file('image');
                 $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('image') , $imageName);
+                $image->move('image' , $imageName);
                 $businessData['image'] = 'image/' . $imageName;
             }
             $business = Business::find($id)->update($businessData);
