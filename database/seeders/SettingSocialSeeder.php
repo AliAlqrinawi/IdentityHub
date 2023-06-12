@@ -82,7 +82,6 @@ class SettingSocialSeeder extends Seeder
             ],
         ];
 
-
         foreach ($data as $key => $value) {
             Setting::create([
                 'key' => $value['key'],

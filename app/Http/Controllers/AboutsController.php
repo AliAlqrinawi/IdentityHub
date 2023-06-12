@@ -80,21 +80,21 @@ class AboutsController extends Controller
                 $name = Str::random(12);
                 $firstPhoto = $request->file('first_photo');
                 $firstPhotoName = $name . time() . '_' . '.' . $firstPhoto->getClientOriginalExtension();
-                $firstPhoto->move(public_path('image'), $firstPhotoName);
+                $firstPhoto->move('image', $firstPhotoName);
                 $aboutData['first_photo'] = 'image/' . $firstPhotoName;
             }
             if ($request->hasFile('second_photo')) {
                 $name = Str::random(12);
                 $secondPhoto = $request->file('second_photo');
                 $secondPhotoName = $name . time() . '_' . '.' . $secondPhoto->getClientOriginalExtension();
-                $secondPhoto->move(public_path('image') , $secondPhotoName);
+                $secondPhoto->move('image' , $secondPhotoName);
                 $aboutData['second_photo'] = 'image/' . $secondPhotoName;
             }
             if ($request->hasFile('cv')) {
                 $name = Str::random(12);
                 $cv = $request->file('cv');
                 $cvName = $name . time() . '_' . '.' . $cv->getClientOriginalExtension();
-                $cv->move(public_path('cv'), $cvName);
+                $cv->move('cv', $cvName);
                 $aboutData['cv'] = 'cv/' . $cvName;
             }
             $about = About::create($aboutData);
@@ -167,21 +167,21 @@ class AboutsController extends Controller
                 $name = Str::random(12);
                 $firstPhoto = $request->file('first_photo');
                 $firstPhotoName = $name . time() . '_' . '.' . $firstPhoto->getClientOriginalExtension();
-                $firstPhoto->move(public_path('image'), $firstPhotoName);
+                $firstPhoto->move('image', $firstPhotoName);
                 $aboutData['first_photo'] = 'image/' . $firstPhotoName;
             }
             if ($request->hasFile('second_photo')) {
                 $name = Str::random(12);
                 $secondPhoto = $request->file('second_photo');
                 $secondPhotoName = $name . time() . '_' . '.' . $secondPhoto->getClientOriginalExtension();
-                $secondPhoto->move(public_path('image') , $secondPhotoName);
+                $secondPhoto->move('image' , $secondPhotoName);
                 $aboutData['second_photo'] = 'image/' . $secondPhotoName;
             }
             if ($request->hasFile('cv')) {
                 $name = Str::random(12);
                 $cv = $request->file('cv');
                 $cvName = $name . time() . '_' . '.' . $cv->getClientOriginalExtension();
-                $cv->move(public_path('cv'), $cvName);
+                $cv->move('cv', $cvName);
                 $aboutData['cv'] = 'cv/' . $cvName;
             }
             $about = About::find($id)->update($aboutData);

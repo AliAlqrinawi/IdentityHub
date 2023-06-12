@@ -78,14 +78,14 @@ class ServicesController extends Controller
                 $name = Str::random(12);
                 $logo = $request->file('logo');
                 $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
-                $logo->move(public_path('image'), $logoName);
+                $logo->move('image', $logoName);
                 $serviceData['logo'] = 'image/' . $logoName;
             }
             if ($request->hasFile('detail_image')) {
                 $name = Str::random(12);
                 $image = $request->file('detail_image');
                 $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('image') , $imageName);
+                $image->move('image' , $imageName);
                 $serviceData['detail_image'] = 'image/' . $imageName;
             }
             $service = Service::create($serviceData);
@@ -150,14 +150,14 @@ class ServicesController extends Controller
                 $name = Str::random(12);
                 $logo = $request->file('logo');
                 $logoName = $name . time() . '_' . '.' . $logo->getClientOriginalExtension();
-                $logo->move(public_path('image'), $logoName);
+                $logo->move('image', $logoName);
                 $serviceData['logo'] = 'image/' . $logoName;
             }
             if ($request->hasFile('detail_image')) {
                 $name = Str::random(12);
                 $image = $request->file('detail_image');
                 $imageName = $name . time() . '_' . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('image') , $imageName);
+                $image->move('image' , $imageName);
                 $serviceData['detail_image'] = 'image/' . $imageName;
             }
             $service = Service::find($id)->update($serviceData);
